@@ -1,0 +1,85 @@
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+.auth-card {
+  max-width: 420px;
+  width: 100%;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-logo {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #FF6B35 0%, #FF9800 100%);
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+  margin-bottom: 1rem;
+}
+
+.auth-title {
+  font-size: 2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  color: #2C3E50;
+  margin: 0 0 0.25rem 0;
+}
+
+.auth-tagline {
+  color: #7F8C8D;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.auth-form {
+  margin-bottom: 1rem;
+}
+
+.auth-error {
+  background: #FFEBEE;
+  color: #C62828;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  border: 1px solid #FFCDD2;
+}
+
+.auth-field-error {
+  display: block;
+  color: #C62828;
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
+}
+
+.auth-actions .btn {
+  width: 100%;
+}
+
+.auth-switch {
+  text-align: center;
+  color: #7F8C8D;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.auth-switch a {
+  color: #FF6B35;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}

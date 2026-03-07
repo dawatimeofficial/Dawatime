@@ -1,0 +1,79 @@
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: slideUp 0.5s ease-out;
+}
+
+.header-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.header-logo {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #FF6B35 0%, #FF9800 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.header-title {
+  color: #2C3E50;
+  font-size: 2.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.header-tagline {
+  color: #7F8C8D;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.header-support {
+  color: #95A5A6;
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
+}
+
+.header-support a {
+  color: #FF6B35;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.header-support a:hover {
+  text-decoration: underline;
+}
+
+.header-user {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.header-user-name {
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.header-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}

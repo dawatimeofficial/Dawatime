@@ -1,0 +1,39 @@
+.symptoms-title {
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  color: #2C3E50;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.symptoms-search-wrap {
+  margin-bottom: 1.5rem;
+}
+
+.symptoms-search-inner {
+  position: relative;
+}
+
+.symptoms-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+.symptoms-search-input {
+  padding-left: 3rem;
+  margin-bottom: 0;
+}
+
+.warning-banner-icon {
+  color: #FF9800;
+  flex-shrink: 0;
+}
+
+.warning-banner-text {
+  font-size: 0.85rem;
+  color: #E65100;
+  line-height: 1.5;
+}

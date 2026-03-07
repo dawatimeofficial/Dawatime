@@ -1,0 +1,107 @@
+.med-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+}
+
+.med-card-main {
+  flex: 1;
+}
+
+.med-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.med-card-title {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #2C3E50;
+  font-weight: 700;
+}
+
+.med-card-due-badge {
+  background: #FF9800;
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.med-card-dosage {
+  margin: 0 0 0.75rem 0;
+  color: #7F8C8D;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.med-card-next {
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  display: inline-flex;
+  width: fit-content;
+}
+
+.med-card-next.normal {
+  color: #FF6B35;
+  background: #FFF5F0;
+}
+
+.med-card-next.due {
+  color: #FF9800;
+  background: #FFF9F5;
+}
+
+.med-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.btn-mark {
+  padding: 0.6rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-mark.normal {
+  background: #E8E8E8;
+  color: #999;
+}
+
+.btn-mark.due {
+  background: #4CAF50;
+  color: white;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.btn-delete {
+  padding: 0.6rem;
+  border-radius: 12px;
+  border: none;
+  background: #FFE5E5;
+  color: #F44336;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.med-card-notes {
+  margin: 0.75rem 0 0 0;
+  font-size: 0.85rem;
+  color: #999;
+  font-style: italic;
+  padding-top: 0.75rem;
+  border-top: 1px solid #F5F5F5;
+}
