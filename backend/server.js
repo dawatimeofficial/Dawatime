@@ -15,6 +15,10 @@ connectDB();
 app.use(cors())
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('DawaTime API is running');
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/medications', medicationRoutes);
 app.use('/api/family', familyRoutes);
