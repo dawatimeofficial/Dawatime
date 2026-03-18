@@ -1,42 +1,24 @@
-import nodemailer from 'nodemailer';
-import dns from 'dns';
+import { Resend } from 'resend';
 
-dns.setDefaultResultOrder('ipv4first'); // 🔥 important
-
-let transporter;
-
-function getTransporter() {
-  if (transporter) return transporter;
-
-  const user = process.env.EMAIL_USER;
-  const pass = process.env.EMAIL_PASS;
-
-  if (!user || !pass) {
-    throw new Error('EMAIL_USER and EMAIL_PASS must be set');
-  }
-
-  transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    family: 4, // 🔥 force IPv4
-    auth: { user, pass },
-    connectionTimeout: 10000, // 🔥 prevent hanging
-  });
-
-  return transporter;
-}
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendOtpEmail({ to, otp }) {
-  const t = getTransporter();
+  try {
+    const { data, error } = await resend.emails.send({
+      from: process.env.FROM_EMAIL || 'onboarding@resend.dev',
+      to: [to],
+      subject: 'Your Login Code',
+      text: `Your OTP is ${otp}. It will expire in 5 minutes.`,
+    });
 
-  const subject = 'Your Login Code';
-  const text = `Your OTP is ${otp}. It will expire in 5 minutes.`;
+    if (error) {
+      console.error('Resend error:', error);
+      throw new Error('Email failed');
+    }
 
-  await t.sendMail({
-    from: `"DawaTime" <${process.env.EMAIL_USER}>`,
-    to,
-    subject,
-    text,
-  });
+    console.log('✅ Email sent via Resend:', data?.id);
+  } catch (err) {
+    console.error('❌ Resend send failed:', err);
+    throw err;
+  }
 }
