@@ -23,42 +23,39 @@ const normalizeEmail = (email) => email?.toString().trim().toLowerCase();
 
 export const sendOtp = async (req, res) => {
   try {
+    console.log("🔥 sendOtp API HIT");
+
     const phone = normalizePhone(req.body.phone);
-    if (!phone) return res.status(400).json({ error: 'Phone is required' });
+    console.log("Phone received:", phone);
 
     const user = await User.findOne({ phone });
-    if (!user) return res.status(404).json({ error: 'No account found for this phone. Please register.' });
+    console.log("User found:", user?.email);
 
-    if (user.lastOtpSentAt && Date.now() - user.lastOtpSentAt.getTime() < 30_000) {
-      return res.status(429).json({ error: 'Please wait before requesting another OTP' });
-    }
+    if (!user) return res.status(404).json({ error: 'No account found' });
 
     const otp = generateOtp();
-    const expiresAt = otpExpiresAt(5);
+    console.log("Generated OTP:", otp);
 
     await Otp.deleteMany({ email: user.email });
-    await Otp.create({ email: user.email, otp, expiresAt });
+    await Otp.create({ email: user.email, otp, expiresAt: otpExpiresAt(5) });
 
     user.lastOtpSentAt = new Date();
     await user.save();
 
-    // ✅ SEND RESPONSE FIRST (IMPORTANT)
+    // 🔥 SEND RESPONSE FIRST
     res.json({ success: true });
 
-    // 🔥 Send email in background (non-blocking)
+    // 🔥 EMAIL (non-blocking)
     sendOtpEmail({ to: user.email, otp })
-      .then(() => {
-        console.log(`[EMAIL OTP] Sent OTP to ${user.email}`);
-      })
-      .catch((err) => {
-        console.error("Email failed:", err);
-      });
+      .then(() => console.log("✅ Email sent"))
+      .catch(err => console.error("❌ Email error:", err));
 
   } catch (error) {
-    console.error("SEND OTP ERROR:", error);
+    console.error("❌ SEND OTP ERROR:", error);
     res.status(500).json({ error: error.message });
   }
 };
+
 export const verifyOtp = async (req, res) => {
   try {
     const phone = normalizePhone(req.body.phone);
