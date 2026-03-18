@@ -29,7 +29,6 @@ export const sendOtp = async (req, res) => {
     const user = await User.findOne({ phone });
     if (!user) return res.status(404).json({ error: 'No account found for this phone. Please register.' });
 
-    // rate limit: 1 per 30s per user
     if (user.lastOtpSentAt && Date.now() - user.lastOtpSentAt.getTime() < 30_000) {
       return res.status(429).json({ error: 'Please wait before requesting another OTP' });
     }
@@ -39,17 +38,27 @@ export const sendOtp = async (req, res) => {
 
     await Otp.deleteMany({ email: user.email });
     await Otp.create({ email: user.email, otp, expiresAt });
+
     user.lastOtpSentAt = new Date();
     await user.save();
 
-    await sendOtpEmail({ to: user.email, otp });
-    console.log(`[EMAIL OTP] Sent OTP to ${user.email} for phone ${phone}`);
+    // ✅ SEND RESPONSE FIRST (IMPORTANT)
     res.json({ success: true });
+
+    // 🔥 Send email in background (non-blocking)
+    sendOtpEmail({ to: user.email, otp })
+      .then(() => {
+        console.log(`[EMAIL OTP] Sent OTP to ${user.email}`);
+      })
+      .catch((err) => {
+        console.error("Email failed:", err);
+      });
+
   } catch (error) {
+    console.error("SEND OTP ERROR:", error);
     res.status(500).json({ error: error.message });
   }
 };
-
 export const verifyOtp = async (req, res) => {
   try {
     const phone = normalizePhone(req.body.phone);
