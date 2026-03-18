@@ -53,6 +53,8 @@ PORT=5000
 MONGODB_URI=<your-production-mongodb-uri>
 JWT_SECRET=<a-strong-random-secret>
 CORS_ORIGIN=https://your-frontend-domain.com
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_password
 ```
 
 **Frontend (`frontend/.env` or host config):**

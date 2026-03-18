@@ -4,13 +4,15 @@ import './AddFamilyMemberModal.css';
 export default function AddFamilyMemberModal({ onAdd, onClose }) {
   const [name, setName] = useState('');
   const [relation, setRelation] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name && relation) {
-      onAdd(name, relation);
+    if (name && relation && phone) {
+      onAdd(name, relation, phone);
       setName('');
       setRelation('');
+      setPhone('');
     }
   };
 
@@ -31,7 +33,7 @@ export default function AddFamilyMemberModal({ onAdd, onClose }) {
             />
           </div>
 
-          <div className="modal-field modal-field-last">
+          <div className="modal-field">
             <label className="modal-label">Relation</label>
             <input
               type="text"
@@ -39,6 +41,18 @@ export default function AddFamilyMemberModal({ onAdd, onClose }) {
               onChange={(e) => setRelation(e.target.value)}
               placeholder="e.g., Mother, Father, Grandmother"
               required
+            />
+          </div>
+
+          <div className="modal-field modal-field-last">
+            <label className="modal-label">Phone Number</label>
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="e.g., +91XXXXXXXXXX"
+              required
+              autoComplete="tel"
             />
           </div>
 

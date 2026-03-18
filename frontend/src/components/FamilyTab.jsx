@@ -31,7 +31,7 @@ export default function FamilyTab({
       ) : (
         <div className="family-list">
           {familyMembers.map((member) => {
-            const memberMeds = medications.filter((m) => m.member === member.id);
+            const memberMeds = medications.filter((m) => Array.isArray(m.memberIds) && m.memberIds.includes(member.id));
             return (
               <div key={member.id} className="med-card">
                 <div className="family-member-row">

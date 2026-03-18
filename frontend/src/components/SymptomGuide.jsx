@@ -127,7 +127,7 @@ export default function SymptomGuide({ searchTerm }) {
               <div className="symptom-emergency-box">
                 <strong>
                   <AlertCircle size={16} />
-                  Emergency - Call 911:
+                  Emergency - Call 108:
                 </strong>
                 <p>{item.emergency}</p>
               </div>

@@ -211,3 +211,26 @@ textarea:focus {
   color: white;
   box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
 }
+
+.emergency-button {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  background: #E53935;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 1.6rem;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(229, 57, 53, 0.45);
+  z-index: 1000;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.emergency-button:hover {
+  background: #C62828;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(198, 40, 40, 0.5);
+}

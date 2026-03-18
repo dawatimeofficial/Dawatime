@@ -10,10 +10,10 @@ import {
   fetchFamily,
   createMedication,
   deleteMedication as apiDeleteMedication,
-  updateMedication,
   createFamilyMember as apiCreateFamilyMember,
   deleteFamilyMember as apiDeleteFamilyMember,
-} from './api';
+  markMedicationTaken,
+} from './api/index.js';
 import './App.css';
 
 export default function DawaTimeApp() {
@@ -46,8 +46,7 @@ export default function DawaTimeApp() {
     try {
       const newMed = await createMedication({
         ...med,
-        member: selectedMember,
-        history: [],
+        memberIds: selectedMember === 'me' ? [] : [selectedMember],
       });
       setMedications((prev) => [...prev, newMed]);
       setShowAddMed(false);
@@ -66,20 +65,17 @@ export default function DawaTimeApp() {
   };
 
   const markTaken = async (medId) => {
-    const med = medications.find((m) => m.id === medId);
-    if (!med) return;
-    const updatedHistory = [...(med.history || []), { timestamp: new Date().toISOString(), taken: true }];
     try {
-      const updated = await updateMedication(medId, { history: updatedHistory });
+      const updated = await markMedicationTaken(medId);
       setMedications((prev) => prev.map((m) => (m.id === medId ? updated : m)));
     } catch (error) {
       console.error('Failed to update medication:', error);
     }
   };
 
-  const addFamilyMember = async (name, relation) => {
+  const addFamilyMember = async (name, relation, phone) => {
     try {
-      const newMember = await apiCreateFamilyMember({ name, relation });
+      const newMember = await apiCreateFamilyMember({ name, relation, phone });
       setFamilyMembers((prev) => [...prev, newMember]);
       setShowAddMember(false);
     } catch (error) {
@@ -97,7 +93,10 @@ export default function DawaTimeApp() {
   };
 
   const getTodaysMeds = () => {
-    return medications.filter((m) => m.member === selectedMember);
+    if (selectedMember === 'me') {
+      return medications.filter((m) => !m.memberIds || m.memberIds.length === 0);
+    }
+    return medications.filter((m) => Array.isArray(m.memberIds) && m.memberIds.includes(selectedMember));
   };
 
   const getUpcomingDose = (med) => {
@@ -164,6 +163,16 @@ export default function DawaTimeApp() {
           />
         )}
       </div>
+
+      <button
+        type="button"
+        className="emergency-button"
+        onClick={() => {
+          window.location.href = 'tel:108';
+        }}
+      >
+        Emergency – Call 108
+      </button>
     </div>
   );
 }

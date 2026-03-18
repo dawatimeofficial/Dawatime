@@ -1,12 +1,6 @@
 import { body, validationResult } from 'express-validator';
 
 export const registerValidation = [
-  body('name')
-    .trim()
-    .notEmpty()
-    .withMessage('Name is required')
-    .isLength({ min: 3 })
-    .withMessage('Name must be at least 3 characters'),
   body('email')
     .trim()
     .notEmpty()
@@ -23,6 +17,12 @@ export const registerValidation = [
     .withMessage('Password must contain at least one number')
     .matches(/[A-Z]/)
     .withMessage('Password must contain at least one uppercase letter'),
+  body('phone')
+    .trim()
+    .notEmpty()
+    .withMessage('Phone is required')
+    .isLength({ min: 6 })
+    .withMessage('Phone must be at least 6 characters'),
 ];
 
 export const handleValidationErrors = (req, res, next) => {

@@ -83,3 +83,11 @@
 .auth-switch a:hover {
   text-decoration: underline;
 }
+
+.auth-method-toggle {
+  display: none;
+}
+
+.auth-method-pill {
+  display: none;
+}

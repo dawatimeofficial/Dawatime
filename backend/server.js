@@ -19,6 +19,8 @@ app.get('/', (req, res) => {
   res.send('DawaTime API is running');
 });
 
+// Auth endpoints (both supported)
+app.use('/auth', authRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/medications', medicationRoutes);
 app.use('/api/family', familyRoutes);

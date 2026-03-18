@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dawatime-secret-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export const protect = async (req, res, next) => {
   try {
