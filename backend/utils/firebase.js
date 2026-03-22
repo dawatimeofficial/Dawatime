@@ -1,20 +1,22 @@
 import admin from 'firebase-admin';
-import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import path from 'path';
 
-// Load service account (make sure service-account.json is in the root of the backend directory)
-try {
-  const serviceAccount = JSON.parse(
-    readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../service-account.json'), 'utf8')
-  );
+// Initialize Firebase Admin using environment variable (JSON string)
+if (!admin.apps.length) {
+  try {
+    const serviceAccountJSON = process.env.FIREBASE_SERVICE_ACCOUNT;
+    if (!serviceAccountJSON) {
+      throw new Error('FIREBASE_SERVICE_ACCOUNT environment variable is not set.');
+    }
 
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-  });
-  console.log('Firebase Admin initialized successfully');
-} catch (error) {
-  console.warn('Firebase Admin setup skipped or failed (service-account.json may be missing).');
+    const serviceAccount = JSON.parse(serviceAccountJSON);
+
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+    console.log('Firebase Admin initialized successfully');
+  } catch (error) {
+    console.warn('Firebase Admin setup failed:', error.message);
+  }
 }
 
 export const sendPushNotification = async (token, title, body) => {
