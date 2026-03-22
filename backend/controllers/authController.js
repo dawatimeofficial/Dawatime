@@ -1,8 +1,6 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
-import Otp from '../models/Otp.js';
-import { generateOtp, otpExpiresAt } from '../utils/otp.js';
-import { sendOtpEmail } from '../utils/email.js';
+import bcrypt from 'bcryptjs';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRES = process.env.JWT_EXPIRES || '7d';
@@ -21,80 +19,64 @@ const signToken = (id) => {
 const normalizePhone = (phone) => phone?.toString().trim();
 const normalizeEmail = (email) => email?.toString().trim().toLowerCase();
 
-export const sendOtp = async (req, res) => {
+export const register = async (req, res) => {
   try {
-    console.log("🔥 sendOtp API HIT");
+    const { name, email, phone, password } = req.body;
+    
+    if (!name || !email || !phone || !password) {
+      return res.status(400).json({ error: 'Name, email, phone, and password are required' });
+    }
 
-    const phone = normalizePhone(req.body.phone);
-    console.log("Phone received:", phone);
+    const normalizedEmail = normalizeEmail(email);
+    const normalizedPhone = normalizePhone(phone);
 
-    const user = await User.findOne({ phone });
-    console.log("User found:", user?.email);
+    const existingEmail = await User.findOne({ email: normalizedEmail });
+    if (existingEmail) return res.status(400).json({ error: 'Email already registered' });
+    
+    const existingPhone = await User.findOne({ phone: normalizedPhone });
+    if (existingPhone) return res.status(400).json({ error: 'Phone already registered' });
 
-    if (!user) return res.status(404).json({ error: 'No account found' });
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    const otp = generateOtp();
-    console.log("Generated OTP:", otp);
-
-    await Otp.deleteMany({ email: user.email });
-    await Otp.create({ email: user.email, otp, expiresAt: otpExpiresAt(5) });
-
-    user.lastOtpSentAt = new Date();
-    await user.save();
-
-    // 🔥 SEND RESPONSE FIRST
-    res.json({ success: true });
-
-    // 🔥 EMAIL (non-blocking)
-    sendOtpEmail({ to: user.email, otp })
-      .then(() => console.log("✅ Email sent"))
-      .catch(err => console.error("❌ Email error:", err));
-
-  } catch (error) {
-    console.error("❌ SEND OTP ERROR:", error);
-    res.status(500).json({ error: error.message });
-  }
-};
-
-export const verifyOtp = async (req, res) => {
-  try {
-    const phone = normalizePhone(req.body.phone);
-    const otp = req.body.otp?.toString().trim();
-    if (!phone || !otp) return res.status(400).json({ error: 'Phone and OTP are required' });
-
-    const user = await User.findOne({ phone });
-    if (!user) return res.status(404).json({ error: 'No account found for this phone. Please register.' });
-
-    const record = await Otp.findOne({ email: user.email, otp });
-    if (!record) return res.status(400).json({ error: 'Invalid OTP' });
-    if (record.expiresAt < new Date()) return res.status(400).json({ error: 'OTP expired' });
-
-    // one-time use
-    await Otp.deleteMany({ email: user.email });
+    const user = await User.create({
+      name,
+      email: normalizedEmail,
+      phone: normalizedPhone,
+      password: hashedPassword,
+    });
 
     ensureJwtSecret();
     const token = signToken(user._id);
-    res.json({ token, user: { id: user._id.toString(), phone: user.phone, email: user.email } });
+
+    res.status(201).json({ token, user: { id: user._id.toString(), name: user.name, phone: user.phone, email: user.email } });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
-export const register = async (req, res) => {
+export const login = async (req, res) => {
   try {
-    const phone = normalizePhone(req.body.phone);
-    const email = normalizeEmail(req.body.email);
-    if (!phone || !email) return res.status(400).json({ error: 'Phone and email are required' });
+    const { email, password } = req.body;
+    
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
 
-    const existingEmail = await User.findOne({ email });
-    if (existingEmail) return res.status(400).json({ error: 'Email already registered' });
-    const existingPhone = await User.findOne({ phone });
-    if (existingPhone) return res.status(400).json({ error: 'Phone already registered' });
+    const normalizedEmail = normalizeEmail(email);
 
-    const user = await User.create({ phone, email });
-    res.status(201).json({ user: { id: user._id.toString(), phone: user.phone, email: user.email } });
+    const user = await User.findOne({ email: normalizedEmail });
+    if (!user) return res.status(404).json({ error: 'Invalid credentials' });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
+
+    ensureJwtSecret();
+    const token = signToken(user._id);
+    
+    res.json({ token, user: { id: user._id.toString(), name: user.name, phone: user.phone, email: user.email, fcmToken: user.fcmToken } });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -104,12 +86,14 @@ export const me = async (req, res) => {
     if (!user) return res.status(404).json({ error: 'User not found' });
     res.json({
       id: user._id.toString(),
+      name: user.name,
       email: user.email,
       phone: user.phone,
+      fcmToken: user.fcmToken,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export default { register, sendOtp, verifyOtp, me };
+export default { register, login, me };

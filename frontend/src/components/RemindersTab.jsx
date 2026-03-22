@@ -69,6 +69,7 @@ export default function RemindersTab({
 
       {showAddMed && (
         <AddMedicationModal
+          familyMembers={familyMembers}
           onAdd={addMedication}
           onClose={() => setShowAddMed(false)}
         />

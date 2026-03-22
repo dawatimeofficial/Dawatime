@@ -1,17 +1,28 @@
 import { useState } from 'react';
 import './AddMedicationModal.css';
 
-export default function AddMedicationModal({ onAdd, onClose }) {
+export default function AddMedicationModal({ familyMembers = [], onAdd, onClose }) {
   const [formData, setFormData] = useState({
     name: '',
     dosage: '',
     frequency: '8',
+    scheduleTime: '08:00',
     notes: '',
+    familyMemberIds: [],
   });
+
+  const handleCheckboxChange = (id) => {
+    setFormData((prev) => {
+      if (prev.familyMemberIds.includes(id)) {
+        return { ...prev, familyMemberIds: prev.familyMemberIds.filter((m) => m !== id) };
+      }
+      return { ...prev, familyMemberIds: [...prev.familyMemberIds, id] };
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.name && formData.dosage) {
+    if (formData.name && formData.dosage && formData.scheduleTime) {
       onAdd(formData);
     }
   };
@@ -45,6 +56,16 @@ export default function AddMedicationModal({ onAdd, onClose }) {
           </div>
 
           <div className="modal-field">
+            <label className="modal-label">Schedule Time * (HH:mm)</label>
+            <input
+              type="time"
+              value={formData.scheduleTime}
+              onChange={(e) => setFormData({ ...formData, scheduleTime: e.target.value })}
+              required
+            />
+          </div>
+
+          <div className="modal-field">
             <label className="modal-label">How Often</label>
             <select
               value={formData.frequency}
@@ -57,6 +78,24 @@ export default function AddMedicationModal({ onAdd, onClose }) {
               <option value="24">Once daily</option>
             </select>
           </div>
+          
+          {familyMembers.length > 0 && (
+            <div className="modal-field">
+              <label className="modal-label">Assign to Family Members</label>
+              <div className="checkbox-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {familyMembers.map((member) => (
+                  <label key={member.id} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      checked={formData.familyMemberIds.includes(member.id)}
+                      onChange={() => handleCheckboxChange(member.id)}
+                    />
+                    {member.name} ({member.relation})
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="modal-field modal-field-last">
             <label className="modal-label">Notes (optional)</label>

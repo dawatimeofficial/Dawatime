@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "661732138690",
+    "project_id": "dawatime-e7f62",
+    "storage_bucket": "dawatime-e7f62.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661732138690:android:fde0f525c599bc76c4255b",
+        "android_client_info": {
+          "package_name": "com.dawatime.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzQ1_HJAipHE4AJ6sgEVm_VYGkCIlysuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -26,7 +26,10 @@ export const deleteFamilyMember = async (req, res) => {
       userId: req.user.id,
     });
     if (!member) return res.status(404).json({ error: 'Family member not found' });
-    await Medication.deleteMany({ userId: req.user.id, member: req.params.id });
+    await Medication.updateMany(
+      { userId: req.user.id },
+      { $pull: { familyMemberIds: req.params.id } }
+    );
     res.json(member);
   } catch (error) {
     res.status(500).json({ error: error.message });

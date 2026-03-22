@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true, lowercase: true, trim: true },
   phone: { type: String, required: true, unique: true, trim: true },
-  lastOtpSentAt: { type: Date, default: null },
+  password: { type: String, required: true },
+  fcmToken: { type: String },
 }, {
   timestamps: true,
   toJSON: {
@@ -11,7 +13,7 @@ const userSchema = new mongoose.Schema({
       ret.id = ret._id.toString();
       delete ret._id;
       delete ret.__v;
-      delete ret.lastOtpSentAt;
+      delete ret.password;
       return ret;
     },
   },

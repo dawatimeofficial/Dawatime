@@ -44,10 +44,8 @@ export default function DawaTimeApp() {
 
   const addMedication = async (med) => {
     try {
-      const newMed = await createMedication({
-        ...med,
-        memberIds: selectedMember === 'me' ? [] : [selectedMember],
-      });
+      // med already has familyMemberIds from the AddMedicationModal
+      const newMed = await createMedication(med);
       setMedications((prev) => [...prev, newMed]);
       setShowAddMed(false);
     } catch (error) {

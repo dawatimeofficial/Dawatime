@@ -2,7 +2,9 @@ import Medication from '../models/Medication.js';
 
 export const getMedications = async (req, res) => {
   try {
-    const medications = await Medication.find({ userId: req.user.id }).sort({ createdAt: -1 });
+    const medications = await Medication.find({ userId: req.user.id })
+      .populate('familyMemberIds')
+      .sort({ createdAt: -1 });
     res.json(medications);
   } catch (error) {
     res.status(500).json({ error: error.message });

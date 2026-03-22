@@ -31,34 +31,23 @@ async function parseJson(res) {
   }
 }
 
-// Auth (Phone OTP)
-export async function sendOtp(phone) {
-  const res = await fetch(`${API_ROOT}/auth/send-otp`, {
+// Auth (Email/Password)
+export async function login(email, password) {
+  const res = await fetch(`${API_ROOT}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ phone }),
+    body: JSON.stringify({ email, password }),
   });
   const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Failed to send OTP');
-  return json;
-}
-
-export async function verifyOtp(phone, otp) {
-  const res = await fetch(`${API_ROOT}/auth/verify-otp`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ phone, otp }),
-  });
-  const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'OTP verification failed');
+  if (!res.ok) throw new Error(json?.error || 'Login failed');
   return json; // { token, user }
 }
 
-export async function register({ email, phone }) {
+export async function register({ name, email, phone, password }) {
   const res = await fetch(`${API_ROOT}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, phone }),
+    body: JSON.stringify({ name, email, phone, password }),
   });
   const json = await parseJson(res);
   if (!res.ok) {
@@ -66,6 +55,17 @@ export async function register({ email, phone }) {
     err.errors = json?.errors;
     throw err;
   }
+  return json;
+}
+
+export async function saveFcmToken(fcmToken) {
+  const res = await fetch(`${API_ROOT}/api/users/save-token`, {
+    method: 'POST',
+    headers: authHeaders(),
+    body: JSON.stringify({ fcmToken }),
+  });
+  const json = await parseJson(res);
+  if (!res.ok) throw new Error(json?.error || 'Failed to save token');
   return json;
 }
 
