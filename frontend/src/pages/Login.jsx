@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Pill } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { login as apiLogin } from '../api/index.js';
+import { registerPushNotifications } from '../utils/pushNotifications.js';
 import '../App.css';
 import './Auth.css';
 
@@ -18,11 +19,21 @@ export default function Login() {
     e.preventDefault();
     setError('');
     setSubmitting(true);
+
     try {
       const { token, user: userData } = await apiLogin(email, password);
+
+      // Save auth first
       login(token, userData);
+
+      // 🔥 IMPORTANT: wait for push setup
+      await registerPushNotifications();
+
+      // Navigate after everything is ready
       navigate('/', { replace: true });
+
     } catch (err) {
+      console.error('LOGIN ERROR:', err);
       setError(err.message || 'Login failed');
     } finally {
       setSubmitting(false);

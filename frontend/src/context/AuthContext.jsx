@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { getToken, setToken, clearToken, fetchMe, saveFcmToken } from '../api/index.js';
+import { getToken, setToken, clearToken, fetchMe } from '../api/index.js';
 import { registerPushNotifications } from '../utils/pushNotifications.js';
 
 const AuthContext = createContext(null);
@@ -7,12 +7,6 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
-
-  const initPush = () => {
-    registerPushNotifications((fcmToken) => {
-      saveFcmToken(fcmToken).catch(console.error);
-    });
-  };
 
   useEffect(() => {
     const token = getToken();
@@ -23,7 +17,7 @@ export function AuthProvider({ children }) {
     fetchMe()
       .then((userData) => {
         setUser(userData);
-        initPush();
+        registerPushNotifications();
       })
       .catch(() => clearToken())
       .finally(() => setAuthLoading(false));
@@ -32,7 +26,6 @@ export function AuthProvider({ children }) {
   const login = (token, userData) => {
     setToken(token);
     setUser(userData);
-    initPush();
   };
 
   const logout = () => {

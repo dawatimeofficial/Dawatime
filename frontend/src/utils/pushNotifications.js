@@ -1,51 +1,80 @@
 import { Capacitor } from '@capacitor/core';
 import { PushNotifications } from '@capacitor/push-notifications';
+import { saveFcmToken, getToken } from '../api/index.js';
 
-/**
- * Register for native push notifications via Capacitor.
- * Only runs on native platforms (Android/iOS), silently no-ops on web.
- * @param {(token: string) => void} onToken - callback that receives the FCM token
- */
-export const registerPushNotifications = async (onToken) => {
-  // Only run on native platforms
+let isRegistered = false;
+
+export const registerPushNotifications = async () => {
   if (!Capacitor.isNativePlatform()) {
-    console.log('Push notifications only supported on native platforms.');
+    console.log('❌ Not native platform');
+    return;
+  }
+
+  if (isRegistered) {
+    console.log('⚠️ Already registered');
     return;
   }
 
   try {
+    console.log('🚀 Starting push setup...');
+
     // Request permission
     const permStatus = await PushNotifications.requestPermissions();
+
     if (permStatus.receive !== 'granted') {
-      console.warn('Push notification permission not granted.');
+      console.log('❌ Permission denied');
       return;
     }
 
-    // Register with FCM
+    console.log('✅ Permission granted');
+
+    // 🔥 LISTENERS FIRST
+    PushNotifications.addListener('registration', async (token) => {
+      console.log('🔥 FCM TOKEN:', token.value);
+
+      const trySaveToken = async (retry = 0) => {
+        const authToken = getToken();
+
+        if (!authToken) {
+          if (retry < 5) {
+            console.log('⏳ Waiting for auth token...');
+            setTimeout(() => trySaveToken(retry + 1), 1500);
+          } else {
+            console.log('❌ Auth token not found, skipping FCM save');
+          }
+          return;
+        }
+
+        try {
+          console.log('📡 Sending token to backend...');
+          await saveFcmToken(token.value);
+          console.log('✅ Token saved to backend');
+        } catch (err) {
+          console.error('❌ Failed to save token:', err);
+        }
+      };
+
+      trySaveToken();
+    });
+
+    PushNotifications.addListener('registrationError', (error) => {
+      console.error('❌ Registration error:', error);
+    });
+
+    PushNotifications.addListener('pushNotificationReceived', (notification) => {
+      console.log('📩 Notification received:', notification);
+    });
+
+    PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
+      console.log('👉 Notification clicked:', notification);
+    });
+
+    // 🔥 REGISTER
     await PushNotifications.register();
 
-    // Listen for the registration token
-    PushNotifications.addListener('registration', (token) => {
-      console.log('FCM Token received:', token.value);
-      if (onToken) onToken(token.value);
-    });
-
-    // Handle registration errors
-    PushNotifications.addListener('registrationError', (error) => {
-      console.error('Push registration error:', error);
-    });
-
-    // Handle incoming notifications while app is open
-    PushNotifications.addListener('pushNotificationReceived', (notification) => {
-      console.log('Push notification received:', notification);
-    });
-
-    // Handle notification tap (app opened from notification)
-    PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
-      console.log('Push notification action performed:', notification);
-    });
+    isRegistered = true;
 
   } catch (error) {
-    console.error('Error setting up push notifications:', error);
+    console.error('❌ Push setup error:', error);
   }
 };

@@ -1,7 +1,7 @@
-const API_ROOT = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-
+const API_ROOT = "https://dawatime-backend.onrender.com/api";
 const AUTH_TOKEN_KEY = 'dawatime_token';
 
+// ================= TOKEN =================
 export function getToken() {
   return localStorage.getItem(AUTH_TOKEN_KEY);
 }
@@ -21,26 +21,44 @@ function authHeaders() {
   return headers;
 }
 
+// ================= HELPERS =================
 async function parseJson(res) {
-  const text = await res.text();
-  if (!text) return null;
   try {
-    return JSON.parse(text);
+    const text = await res.text();
+    return text ? JSON.parse(text) : null;
   } catch {
     return null;
   }
 }
 
-// Auth (Email/Password)
-export async function login(email, password) {
-  const res = await fetch(`${API_ROOT}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
+async function handleResponse(res) {
   const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Login failed');
-  return json; // { token, user }
+
+  if (!res.ok) {
+    const message =
+      json?.error ||
+      json?.message ||
+      `Request failed (${res.status})`;
+    throw new Error(message);
+  }
+
+  return json;
+}
+
+// ================= AUTH =================
+export async function login(email, password) {
+  try {
+    const res = await fetch(`${API_ROOT}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    return await handleResponse(res);
+  } catch (err) {
+    console.log("LOGIN ERROR:", err);
+    throw err;
+  }
 }
 
 export async function register({ name, email, phone, password }) {
@@ -49,105 +67,90 @@ export async function register({ name, email, phone, password }) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, email, phone, password }),
   });
-  const json = await parseJson(res);
-  if (!res.ok) {
-    const err = new Error(json?.error || 'Registration failed');
-    err.errors = json?.errors;
-    throw err;
-  }
-  return json;
-}
 
-export async function saveFcmToken(fcmToken) {
-  const res = await fetch(`${API_ROOT}/api/users/save-token`, {
-    method: 'POST',
-    headers: authHeaders(),
-    body: JSON.stringify({ fcmToken }),
-  });
-  const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Failed to save token');
-  return json;
+  return await handleResponse(res);
 }
 
 export async function fetchMe() {
   const res = await fetch(`${API_ROOT}/auth/me`, {
     headers: authHeaders(),
   });
-  const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Not authenticated');
-  return json;
+
+  return await handleResponse(res);
 }
 
-// Medications
+// ================= FCM =================
+export async function saveFcmToken(fcmToken) {
+  const res = await fetch(`${API_ROOT}/users/save-token`, {
+    method: 'POST',
+    headers: authHeaders(),
+    body: JSON.stringify({ fcmToken }),
+  });
+
+  return await handleResponse(res);
+}
+
+// ================= MEDICATION =================
 export async function fetchMedications() {
-  const res = await fetch(`${API_ROOT}/api/medications`, {
+  const res = await fetch(`${API_ROOT}/medications`, {
     headers: authHeaders(),
   });
-  const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Failed to fetch medications');
-  return json;
+
+  return await handleResponse(res);
 }
 
 export async function createMedication(data) {
-  const res = await fetch(`${API_ROOT}/api/medications`, {
+  const res = await fetch(`${API_ROOT}/medications`, {
     method: 'POST',
     headers: authHeaders(),
     body: JSON.stringify(data),
   });
-  const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Failed to add medication');
-  return json;
+
+  return await handleResponse(res);
 }
 
 export async function deleteMedication(id) {
-  const res = await fetch(`${API_ROOT}/api/medications/${id}`, {
+  const res = await fetch(`${API_ROOT}/medications/${id}`, {
     method: 'DELETE',
     headers: authHeaders(),
   });
-  const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Failed to delete medication');
-  return json;
+
+  return await handleResponse(res);
 }
 
 export async function markMedicationTaken(id) {
-  const res = await fetch(`${API_ROOT}/api/medications/${id}/taken`, {
+  const res = await fetch(`${API_ROOT}/medications/${id}/taken`, {
     method: 'POST',
     headers: authHeaders(),
   });
-  const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Failed to mark medication taken');
-  return json;
+
+  return await handleResponse(res);
 }
 
-// Family
+// ================= FAMILY =================
 export async function fetchFamily() {
-  const res = await fetch(`${API_ROOT}/api/family`, {
+  const res = await fetch(`${API_ROOT}/family`, {
     headers: authHeaders(),
   });
-  const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Failed to fetch family members');
-  return json;
+
+  return await handleResponse(res);
 }
 
 export async function createFamilyMember(data) {
-  const res = await fetch(`${API_ROOT}/api/family`, {
+  const res = await fetch(`${API_ROOT}/family`, {
     method: 'POST',
     headers: authHeaders(),
     body: JSON.stringify(data),
   });
-  const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Failed to add family member');
-  return json;
+
+  return await handleResponse(res);
 }
 
-// Backwards compatible (your backend currently supports delete)
 export async function deleteFamilyMember(id) {
-  const res = await fetch(`${API_ROOT}/api/family/${id}`, {
+  const res = await fetch(`${API_ROOT}/family/${id}`, {
     method: 'DELETE',
     headers: authHeaders(),
   });
-  const json = await parseJson(res);
-  if (!res.ok) throw new Error(json?.error || 'Failed to delete family member');
-  return json;
-}
 
+  return await handleResponse(res);
+}
