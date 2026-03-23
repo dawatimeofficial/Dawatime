@@ -90,7 +90,7 @@ export default function AddMedicationModal({ familyMembers = [], onAdd, onClose 
                       checked={formData.familyMemberIds.includes(member.id)}
                       onChange={() => handleCheckboxChange(member.id)}
                     />
-                    {member.name} ({member.relation})
+                    {member.name} ({member.phone})
                   </label>
                 ))}
               </div>

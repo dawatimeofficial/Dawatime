@@ -12,7 +12,7 @@ const medicationSchema = new mongoose.Schema({
   frequency: { type: String, default: '8' },
   scheduleTime: { type: String, required: true },
   notes: { type: String, default: '' },
-  familyMemberIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'FamilyMember' }],
+  familyMemberIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   lastNotifiedAt: { type: Date },
   history: { type: [historyEntrySchema], default: [] },
 }, {

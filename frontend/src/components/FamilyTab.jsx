@@ -38,7 +38,7 @@ export default function FamilyTab({
                   <div>
                     <h3 className="family-member-name">{member.name}</h3>
                     <p className="family-member-meta">
-                      {member.relation} • {memberMeds.length} medication
+                      {member.phone} • {memberMeds.length} medication
                       {memberMeds.length !== 1 ? 's' : ''}
                     </p>
                   </div>

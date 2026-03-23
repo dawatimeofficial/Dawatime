@@ -10,8 +10,8 @@ import {
   fetchFamily,
   createMedication,
   deleteMedication as apiDeleteMedication,
-  createFamilyMember as apiCreateFamilyMember,
-  deleteFamilyMember as apiDeleteFamilyMember,
+  addFamilyMember as apiAddFamilyMember,
+  removeFamilyMember as apiRemoveFamilyMember,
   markMedicationTaken,
 } from './api/index.js';
 import './App.css';
@@ -71,22 +71,18 @@ export default function DawaTimeApp() {
     }
   };
 
-  const addFamilyMember = async (name, relation, phone) => {
-    try {
-      const newMember = await apiCreateFamilyMember({ name, relation, phone });
-      setFamilyMembers((prev) => [...prev, newMember]);
-      setShowAddMember(false);
-    } catch (error) {
-      console.error('Failed to add family member:', error);
-    }
+  const addFamilyMember = async (phone) => {
+    const newMember = await apiAddFamilyMember(phone);
+    setFamilyMembers((prev) => [...prev, newMember]);
+    setShowAddMember(false);
   };
 
   const deleteFamilyMember = async (id) => {
     try {
-      await apiDeleteFamilyMember(id);
+      await apiRemoveFamilyMember(id);
       await loadData();
     } catch (error) {
-      console.error('Failed to delete family member:', error);
+      console.error('Failed to remove family member:', error);
     }
   };
 

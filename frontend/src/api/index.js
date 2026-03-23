@@ -129,25 +129,25 @@ export async function markMedicationTaken(id) {
 
 // ================= FAMILY =================
 export async function fetchFamily() {
-  const res = await fetch(`${API_ROOT}/family`, {
+  const res = await fetch(`${API_ROOT}/users/family`, {
     headers: authHeaders(),
   });
 
   return await handleResponse(res);
 }
 
-export async function createFamilyMember(data) {
-  const res = await fetch(`${API_ROOT}/family`, {
+export async function addFamilyMember(phone) {
+  const res = await fetch(`${API_ROOT}/users/add-family`, {
     method: 'POST',
     headers: authHeaders(),
-    body: JSON.stringify(data),
+    body: JSON.stringify({ phone }),
   });
 
   return await handleResponse(res);
 }
 
-export async function deleteFamilyMember(id) {
-  const res = await fetch(`${API_ROOT}/family/${id}`, {
+export async function removeFamilyMember(id) {
+  const res = await fetch(`${API_ROOT}/users/family/${id}`, {
     method: 'DELETE',
     headers: authHeaders(),
   });
