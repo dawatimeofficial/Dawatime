@@ -4,32 +4,39 @@ import User from '../models/User.js';
 import { sendPushNotification } from './firebase.js';
 
 export const startCronJobs = () => {
-  // Run every minute
   cron.schedule('* * * * *', async () => {
     console.log('------------------------------');
     console.log('⏰ CRON TICK');
 
     try {
-      const now = new Date();
+      // ✅ FIX 1: Use IST timezone
+      const now = new Date(
+        new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
+      );
 
       const currentHours = now.getHours().toString().padStart(2, '0');
       const currentMinutes = now.getMinutes().toString().padStart(2, '0');
       const timeString = `${currentHours}:${currentMinutes}`;
 
-      console.log(`🕒 Current server time: ${timeString}`);
+      console.log(`🕒 Current IST time: ${timeString}`);
 
-      // 🔥 DEBUG: Show ALL stored times
+      // ✅ Fetch all meds
       const allMeds = await Medication.find({});
       console.log(
         '📦 All medication times:',
-        allMeds.map(m => m.scheduleTime)
+        allMeds.map(m => m.scheduleTime || m.time || '❌ NO TIME')
       );
 
-      // 🔥 FIX: allow slight mismatch (tolerant matching)
+      // ✅ FIX 2: Support both scheduleTime & old "time"
       const meds = allMeds.filter(med => {
-        if (!med.scheduleTime) return false;
+        const time = med.scheduleTime || med.time;
 
-        const [h, m] = med.scheduleTime.split(':').map(Number);
+        if (!time) {
+          console.log(`⚠️ Skipping "${med.name}" → NO TIME FIELD`);
+          return false;
+        }
+
+        const [h, m] = time.split(':').map(Number);
 
         return h === now.getHours() && m === now.getMinutes();
       });
@@ -42,16 +49,20 @@ export const startCronJobs = () => {
       }
 
       for (const med of meds) {
-        console.log(`💊 MATCHED: ${med.name} at ${med.scheduleTime}`);
+        const time = med.scheduleTime || med.time;
+
+        console.log(`💊 MATCHED: ${med.name} at ${time}`);
 
         const lastNotified = med.lastNotifiedAt;
 
-        // Prevent duplicate notification
+        // ✅ Prevent duplicate notification
         if (
           lastNotified &&
           lastNotified.getHours() === now.getHours() &&
           lastNotified.getMinutes() === now.getMinutes() &&
-          lastNotified.getDate() === now.getDate()
+          lastNotified.getDate() === now.getDate() &&
+          lastNotified.getMonth() === now.getMonth() &&
+          lastNotified.getFullYear() === now.getFullYear()
         ) {
           console.log('⏭️ Already notified this minute, skipping');
           continue;
@@ -60,7 +71,7 @@ export const startCronJobs = () => {
         const title = 'Medicine Reminder 💊';
         const body = `Time to take ${med.name}`;
 
-        // Populate user
+        // ✅ Populate user safely
         const populatedMed = await med.populate('userId');
 
         // 1️⃣ Send to main user
@@ -92,7 +103,7 @@ export const startCronJobs = () => {
           }
         }
 
-        // Save notification timestamp
+        // ✅ Save timestamp
         med.lastNotifiedAt = now;
         await med.save();
 
