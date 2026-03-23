@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import { useEffect, useState } from 'react';
+import { Capacitor } from '@capacitor/core';
 
 import LoadingScreen from './components/LoadingScreen';
 import SplashScreen from './components/SplashScreen';
@@ -11,23 +12,26 @@ import DawaTimeApp from './App';
 export default function AppRouter() {
   const { user, authLoading } = useAuth();
 
-  const [showSplash, setShowSplash] = useState(true);
+  const isNative = Capacitor.isNativePlatform(); // 🔥 detect app
+  const [showSplash, setShowSplash] = useState(isNative); // 🔥 only true on app
 
-  // 🔥 Splash timer
+  // 🔥 Splash timer (only runs in app)
   useEffect(() => {
+    if (!isNative) return;
+
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 5000); // adjust based on your animation
+    }, 3000); // adjust timing
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isNative]);
 
-  // 🔥 Show splash FIRST
-  if (showSplash) {
+  // 🔥 Show splash ONLY in app
+  if (isNative && showSplash) {
     return <SplashScreen />;
   }
 
-  // 🔥 Then check auth
+  // 🔥 Then auth loading
   if (authLoading) {
     return <LoadingScreen />;
   }
