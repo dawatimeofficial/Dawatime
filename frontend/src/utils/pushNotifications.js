@@ -18,7 +18,7 @@ export const registerPushNotifications = async () => {
   try {
     console.log('🚀 Starting push setup...');
 
-    // Request permission
+    // ✅ Request permission
     const permStatus = await PushNotifications.requestPermissions();
 
     if (permStatus.receive !== 'granted') {
@@ -27,6 +27,17 @@ export const registerPushNotifications = async () => {
     }
 
     console.log('✅ Permission granted');
+
+    // 🔥 CREATE CHANNEL (CRITICAL FIX)
+    await PushNotifications.createChannel({
+      id: 'medication_reminders',
+      name: 'Medication Reminders',
+      description: 'Reminder notifications',
+      importance: 5,
+      visibility: 1,
+    });
+
+    console.log('📢 Notification channel created');
 
     // 🔥 LISTENERS FIRST
     PushNotifications.addListener('registration', async (token) => {
@@ -69,8 +80,10 @@ export const registerPushNotifications = async () => {
       console.log('👉 Notification clicked:', notification);
     });
 
-    // 🔥 REGISTER
+    // 🔥 REGISTER AFTER EVERYTHING
     await PushNotifications.register();
+
+    console.log('✅ Push registration completed');
 
     isRegistered = true;
 
