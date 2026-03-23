@@ -1,23 +1,41 @@
 import { Pill, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { Capacitor } from '@capacitor/core';
 import './Header.css';
 
 export default function Header() {
   const { user, logout } = useAuth();
+  const isNative = Capacitor.isNativePlatform();
 
   return (
     <div className="header">
+
+      {/* 🔥 Download button (ONLY on website) */}
+      {!isNative && (
+        <a
+          href="https://your-apk-link.apk" // 🔁 replace this
+          className="download-btn"
+        >
+          ⬇ Get App
+        </a>
+      )}
+
       <div className="header-brand">
         <div className="header-logo">
           <Pill size={28} color="white" strokeWidth={2.5} />
         </div>
         <h1 className="header-title">DawaTime</h1>
       </div>
+
       <p className="header-tagline">Medicine reminders made simple 💊</p>
+
       <p className="header-support">
         Support:{' '}
-        <a href="mailto:dawatime.official@gmail.com">dawatime.official@gmail.com</a>
+        <a href="mailto:dawatime.official@gmail.com">
+          dawatime.official@gmail.com
+        </a>
       </p>
+
       {user && (
         <div className="header-user">
           <span className="header-user-name">{user.name}</span>

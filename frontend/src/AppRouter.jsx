@@ -1,6 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
+import { useEffect, useState } from 'react';
+
 import LoadingScreen from './components/LoadingScreen';
+import SplashScreen from './components/SplashScreen';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import DawaTimeApp from './App';
@@ -8,16 +11,45 @@ import DawaTimeApp from './App';
 export default function AppRouter() {
   const { user, authLoading } = useAuth();
 
+  const [showSplash, setShowSplash] = useState(true);
+
+  // 🔥 Splash timer
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 5000); // adjust based on your animation
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // 🔥 Show splash FIRST
+  if (showSplash) {
+    return <SplashScreen />;
+  }
+
+  // 🔥 Then check auth
   if (authLoading) {
     return <LoadingScreen />;
   }
 
   return (
     <Routes>
-      <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
-      <Route path="/register" element={user ? <Navigate to="/" replace /> : <Register />} />
-      <Route path="/" element={user ? <DawaTimeApp /> : <Navigate to="/login" replace />} />
-      <Route path="*" element={<Navigate to={user ? '/' : '/login'} replace />} />
+      <Route
+        path="/login"
+        element={user ? <Navigate to="/" replace /> : <Login />}
+      />
+      <Route
+        path="/register"
+        element={user ? <Navigate to="/" replace /> : <Register />}
+      />
+      <Route
+        path="/"
+        element={user ? <DawaTimeApp /> : <Navigate to="/login" replace />}
+      />
+      <Route
+        path="*"
+        element={<Navigate to={user ? '/' : '/login'} replace />}
+      />
     </Routes>
   );
 }
