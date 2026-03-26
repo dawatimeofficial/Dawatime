@@ -1,0 +1,23 @@
+.mobile-fab {
+  position: fixed;
+  right: 16px;
+  bottom: calc(72px + env(safe-area-inset-bottom));
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  border: none;
+  background: #FF6B35;
+  color: white;
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.mobile-fab:active {
+  background: #e55a2b;
+  transform: scale(0.92);
+}

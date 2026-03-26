@@ -1,0 +1,105 @@
+:root {
+  --motion-fast: 150ms;
+  --motion-normal: 250ms;
+  --motion-slow: 350ms;
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-scale-click {
+  transition: transform var(--motion-fast) var(--ease-smooth),
+              opacity var(--motion-fast) var(--ease-smooth);
+}
+
+.mobile-scale-click:active {
+  transform: scale(0.95);
+  opacity: 0.9;
+}
+
+.fade-in {
+  animation: fadeIn var(--motion-slow) var(--ease-smooth) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight var(--motion-normal) var(--ease-smooth) forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.med-exit-animation {
+  animation: medExit var(--motion-normal) var(--ease-smooth) forwards;
+}
+
+@keyframes medExit {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(10px) scale(0.98);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100px) scale(0.9);
+  }
+}
+
+.med-success {
+  animation: medSuccess var(--motion-normal) var(--ease-spring) forwards;
+}
+
+@keyframes medSuccess {
+  0% {
+    transform: scale(1);
+    background: white;
+  }
+  50% {
+    transform: scale(1.02);
+    background: #dcfce7;
+  }
+  100% {
+    transform: scale(1);
+    background: #dcfce7;
+  }
+}
+
+.bottom-nav-item {
+  transition: transform var(--motion-fast) var(--ease-smooth),
+              color var(--motion-fast) var(--ease-smooth);
+}
+
+.bottom-nav-item:active {
+  transform: scale(0.92);
+}
+
+.mobile-fab, 
+.mobile-emergency,
+.mobile-med-btn-take,
+.mobile-med-btn-delete,
+.mobile-member-chip,
+.mobile-add-card,
+.mobile-logout-btn {
+  transition: transform var(--motion-fast) var(--ease-smooth),
+              background var(--motion-fast) var(--ease-smooth);
+}

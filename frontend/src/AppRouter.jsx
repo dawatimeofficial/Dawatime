@@ -7,7 +7,7 @@ import LoadingScreen from './components/LoadingScreen';
 import SplashScreen from './components/SplashScreen';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import DawaTimeApp from './App';
+import DawaTimeApp from './components/DawaTimeApp';
 
 export default function AppRouter() {
   const { user, authLoading } = useAuth();

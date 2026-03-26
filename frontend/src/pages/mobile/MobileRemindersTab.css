@@ -1,0 +1,166 @@
+.mobile-reminders {
+  padding-bottom: 80px;
+}
+
+.mobile-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.mobile-empty-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #fff7ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.mobile-empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 8px 0;
+}
+
+.mobile-empty-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.mobile-med-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-med-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  animation: slideInRight 0.3s ease forwards;
+}
+
+.mobile-med-card.due {
+  border: 2px solid #FF6B35;
+}
+
+.mobile-med-card.med-success {
+  background: #dcfce7;
+  border-color: #22c55e;
+}
+
+.mobile-med-info {
+  flex: 1;
+}
+
+.mobile-med-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
+}
+
+.mobile-med-dosage {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+}
+
+.mobile-med-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #FF6B35;
+  font-weight: 500;
+}
+
+.mobile-med-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-med-btn-take {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  border: none;
+  background: #FF6B35;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 48px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.mobile-med-btn-take:active {
+  transform: scale(0.95);
+  background: #e55a2b;
+}
+
+.mobile-med-btn-take:disabled {
+  background: #22c55e;
+}
+
+.mobile-med-btn-delete {
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #fef2f2;
+  color: #ef4444;
+  cursor: pointer;
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.mobile-med-btn-delete:active {
+  transform: scale(0.95);
+  background: #fee2e2;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes medSuccess {
+  0% {
+    transform: scale(1);
+    background: white;
+  }
+  50% {
+    transform: scale(1.02);
+    background: #dcfce7;
+  }
+  100% {
+    transform: scale(1);
+    background: #dcfce7;
+  }
+}

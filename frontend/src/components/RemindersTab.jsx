@@ -4,9 +4,6 @@ import AddMedicationModal from './AddMedicationModal';
 import './RemindersTab.css';
 
 export default function RemindersTab({
-  selectedMember,
-  setSelectedMember,
-  familyMembers,
   todaysMeds,
   getUpcomingDose,
   isDueNow,
@@ -18,23 +15,6 @@ export default function RemindersTab({
 }) {
   return (
     <div className="card">
-      <div className="member-row">
-        <button
-          onClick={() => setSelectedMember('me')}
-          className={`member-chip ${selectedMember === 'me' ? 'active' : ''}`}
-        >
-          You
-        </button>
-        {familyMembers.map((member) => (
-          <button
-            key={member.id}
-            onClick={() => setSelectedMember(member.id)}
-            className={`member-chip ${selectedMember === member.id ? 'active' : ''}`}
-          >
-            {member.name}
-          </button>
-        ))}
-      </div>
 
       <div className="schedule-header">
         <h2 className="schedule-title">Today's Schedule</h2>
@@ -69,7 +49,6 @@ export default function RemindersTab({
 
       {showAddMed && (
         <AddMedicationModal
-          familyMembers={familyMembers}
           onAdd={addMedication}
           onClose={() => setShowAddMed(false)}
         />
