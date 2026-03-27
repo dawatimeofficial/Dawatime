@@ -13,10 +13,92 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background: white;
+  background: var(--bg-card);
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-family-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.mobile-family-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 4px 0;
+}
+
+.mobile-family-meta {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.mobile-family-delete {
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: var(--danger-light);
+  color: var(--danger);
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-family-delete:active {
+  background: var(--danger-light);
+}
+
+.mobile-add-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  border: 2px dashed var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.mobile-add-card:active {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.mobile-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mobile-add-btn:active {
+  background: var(--primary-hover);
 }
 
 .mobile-family-avatar {

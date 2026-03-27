@@ -15,11 +15,112 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #fff7ed;
+  background: var(--primary-light);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
+}
+
+.mobile-empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 8px 0;
+}
+
+.mobile-empty-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.mobile-med-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  animation: slideInRight 0.3s ease forwards;
+}
+
+.mobile-med-card.due {
+  border: 2px solid var(--primary);
+}
+
+.mobile-med-card.med-success {
+  background: #dcfce7;
+  border-color: var(--accent);
+}
+
+.mobile-med-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 4px 0;
+}
+
+.mobile-med-dosage {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 8px 0;
+}
+
+.mobile-med-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.mobile-med-btn-take {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 48px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.mobile-med-btn-take:active {
+  transform: scale(0.95);
+  background: var(--primary-hover);
+}
+
+.mobile-med-btn-take:disabled {
+  background: var(--accent);
+}
+
+.mobile-med-btn-delete {
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: var(--danger-light);
+  color: var(--danger);
+  cursor: pointer;
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.mobile-med-btn-delete:active {
+  transform: scale(0.95);
+  background: var(--danger-light);
 }
 
 .mobile-empty-title {

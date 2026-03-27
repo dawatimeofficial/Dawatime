@@ -8,9 +8,61 @@
 .family-title {
   font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
-  color: #2C3E50;
+  color: var(--text-main);
   margin: 0;
   font-weight: 700;
+}
+
+.family-member-name {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.15rem;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.family-member-meta {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.family-btn-delete {
+  padding: 0.6rem;
+  border-radius: 12px;
+  border: none;
+  background: var(--danger-light);
+  color: var(--danger);
+  cursor: pointer;
+}
+
+.family-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+}
+
+.family-empty-icon-wrap {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.family-empty-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.family-empty-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
 }
 
 .family-list {

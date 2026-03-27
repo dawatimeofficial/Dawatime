@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #FFF8F0;
+  background: var(--bg-primary);
   font-family: "Inter", system-ui, sans-serif;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .loading-text {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 1rem;
   font-weight: 600;
 }

@@ -15,7 +15,7 @@
 .schedule-title {
   font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
-  color: #2C3E50;
+  color: var(--text-main);
   margin: 0;
   font-weight: 700;
 }
@@ -23,13 +23,13 @@
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
-  color: #999;
+  color: var(--text-muted);
 }
 
 .empty-icon-wrap {
   width: 80px;
   height: 80px;
-  background: #FFF5F0;
+  background: var(--primary-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -40,13 +40,13 @@
 .empty-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 0.5rem;
 }
 
 .empty-desc {
   font-size: 0.9rem;
-  color: #999;
+  color: var(--text-muted);
 }
 
 .med-list {

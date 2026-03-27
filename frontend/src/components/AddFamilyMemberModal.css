@@ -15,20 +15,20 @@
 }
 
 .modal-box {
-  background: white;
+  background: var(--bg-card);
   border-radius: 20px;
   padding: 2rem;
   max-width: 500px;
   width: 100%;
   animation: slideUp 0.3s ease-out;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-lg);
 }
 
 .modal-title {
   font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
   margin-bottom: 1.5rem;
-  color: #2C3E50;
+  color: var(--text-main);
   font-weight: 700;
 }
 
@@ -44,7 +44,7 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #555;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 

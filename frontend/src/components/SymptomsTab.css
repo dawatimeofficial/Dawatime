@@ -1,7 +1,7 @@
 .symptoms-title {
   font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
-  color: #2C3E50;
+  color: var(--text-main);
   margin-bottom: 1.5rem;
   font-weight: 700;
 }
@@ -17,23 +17,23 @@
   align-items: center;
   gap: 6px;
   padding: 10px 16px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  background: white;
+  background: var(--bg-card);
   font-size: 14px;
   font-weight: 500;
-  color: #6b7280;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .symptoms-mode-btn:hover {
-  background: #f9fafb;
+  background: var(--bg-secondary);
 }
 
 .symptoms-mode-btn.active {
-  background: #FF6B35;
-  border-color: #FF6B35;
+  background: var(--primary);
+  border-color: var(--primary);
   color: white;
 }
 
@@ -50,7 +50,7 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #999;
+  color: var(--text-muted);
 }
 
 .symptoms-search-input {
@@ -59,12 +59,12 @@
 }
 
 .warning-banner-icon {
-  color: #FF9800;
+  color: var(--warning);
   flex-shrink: 0;
 }
 
 .warning-banner-text {
   font-size: 0.85rem;
-  color: #E65100;
+  color: var(--text-secondary);
   line-height: 1.5;
 }

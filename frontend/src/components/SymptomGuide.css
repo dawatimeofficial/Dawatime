@@ -14,7 +14,7 @@
 .symptom-card-title {
   margin: 0;
   font-size: 1.15rem;
-  color: #1976D2;
+  color: var(--primary);
   font-weight: 700;
 }
 
@@ -28,13 +28,13 @@
 }
 
 .symptom-severity.common {
-  background: #E3F2FD;
-  color: #1976D2;
+  background: var(--primary-light);
+  color: var(--primary);
 }
 
 .symptom-severity.serious {
-  background: #FFEBEE;
-  color: #C62828;
+  background: var(--danger-light);
+  color: var(--danger);
 }
 
 .symptom-card-body {
@@ -45,25 +45,25 @@
 }
 
 .symptom-section strong {
-  color: #2C3E50;
+  color: var(--text-main);
   font-weight: 600;
 }
 
 .symptom-section p {
   margin: 0.35rem 0 0 0;
-  color: #555;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
 .symptom-doctor-box {
   padding: 0.85rem;
-  background: rgba(33, 150, 243, 0.08);
+  background: var(--primary-light);
   border-radius: 10px;
-  border-left: 3px solid #2196F3;
+  border-left: 3px solid var(--primary);
 }
 
 .symptom-doctor-box strong {
-  color: #1976D2;
+  color: var(--primary);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -72,19 +72,19 @@
 
 .symptom-doctor-box p {
   margin: 0.35rem 0 0 0;
-  color: #1976D2;
+  color: var(--primary);
   line-height: 1.6;
 }
 
 .symptom-emergency-box {
   padding: 0.85rem;
-  background: #FFEBEE;
+  background: var(--danger-light);
   border-radius: 10px;
-  border-left: 3px solid #F44336;
+  border-left: 3px solid var(--danger);
 }
 
 .symptom-emergency-box strong {
-  color: #C62828;
+  color: var(--danger);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -93,14 +93,14 @@
 
 .symptom-emergency-box p {
   margin: 0.35rem 0 0 0;
-  color: #C62828;
+  color: var(--danger);
   line-height: 1.6;
 }
 
 .symptom-empty {
   text-align: center;
   padding: 3rem 1rem;
-  color: #999;
+  color: var(--text-muted);
 }
 
 .symptom-empty-icon {
@@ -111,10 +111,12 @@
 .symptom-empty-title {
   font-size: 1rem;
   font-weight: 600;
+  color: var(--text-main);
 }
 
 .symptom-empty-desc {
   font-size: 0.9rem;
+  color: var(--text-secondary);
 }
 
 .symptom-remember {

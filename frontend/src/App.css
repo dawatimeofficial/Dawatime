@@ -39,7 +39,7 @@ html, body {
 .app-root {
   min-height: 100vh;
   width: 100%;
-  background: #FFF8F0;
+  background: var(--bg-primary);
   font-family: "Inter", system-ui, sans-serif;
   padding: 1.5rem;
 }
@@ -51,61 +51,61 @@ html, body {
 }
 
 .card {
-  background: white;
+  background: var(--bg-card);
   border-radius: 20px;
   padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.08);
+  box-shadow: var(--shadow-md);
   animation: slideUp 0.5s ease-out;
 }
 
 .med-card {
-  background: #FFFBF7;
+  background: var(--bg-secondary);
   border-radius: 16px;
   padding: 1.25rem;
-  border-left: 4px solid #FF6B35;
+  border-left: 4px solid var(--primary);
   transition: all 0.2s ease;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid #FFE8DC;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
 }
 
 .med-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.12);
-  border-left-color: #FF5722;
+  box-shadow: var(--shadow-lg);
+  border-left-color: var(--primary-hover);
 }
 
 .med-card.due {
-  border-left-color: #FF9800;
-  background: #FFF9F5;
+  border-left-color: var(--warning);
+  background: var(--warning-light);
   animation: pulse 2s ease-in-out infinite;
-  border: 1px solid #FFE0B2;
+  border-color: var(--warning-light);
 }
 
 .tab {
   padding: 0.7rem 1.25rem;
   border-radius: 30px;
-  background: white;
-  color: #666;
+  background: var(--bg-card);
+  color: var(--text-secondary);
   border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: 600;
   font-size: 0.9rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
 }
 
 .tab:hover {
-  background: #FFF5F0;
-  color: #FF6B35;
-  border-color: #FFE8DC;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary-light);
 }
 
 .tab.active {
-  background: #FF6B35;
-  color: white;
+  background: var(--primary);
+  color: var(--text-inverse);
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+  box-shadow: var(--shadow-md);
 }
 
 .btn {
@@ -119,24 +119,24 @@ html, body {
 }
 
 .btn-primary {
-  background: #FF6B35;
-  color: white;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+  background: var(--primary);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-primary:hover {
-  background: #FF5722;
+  background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 107, 53, 0.35);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-secondary {
-  background: #F5F5F5;
-  color: #666;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
 }
 
 .btn-secondary:hover {
-  background: #EBEBEB;
+  background: var(--border-color);
 }
 
 input,
@@ -145,55 +145,61 @@ textarea {
   width: 100%;
   padding: 0.85rem;
   border-radius: 12px;
-  border: 2px solid #F0F0F0;
+  border: 2px solid var(--border-color);
   font-size: 0.95rem;
   transition: all 0.2s ease;
   font-family: inherit;
-  background: #FAFAFA;
+  background: var(--bg-elevated);
+  color: var(--text-main);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
 }
 
 input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: #FF6B35;
-  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.08);
-  background: white;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  background: var(--bg-card);
 }
 
 .symptom-card {
-  background: #F8FBFF;
+  background: var(--primary-light);
   border-radius: 16px;
   padding: 1.25rem;
   margin-bottom: 1rem;
-  border-left: 4px solid #2196F3;
+  border-left: 4px solid var(--primary);
   transition: all 0.2s ease;
-  border: 1px solid #E3F2FD;
+  border: 1px solid var(--border-light);
 }
 
 .symptom-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .warning-banner {
-  background: #FFF9E6;
+  background: var(--warning-light);
   border-radius: 12px;
   padding: 1rem;
-  border-left: 4px solid #FFA726;
+  border-left: 4px solid var(--warning);
   margin-bottom: 1.5rem;
   display: flex;
   gap: 0.75rem;
   align-items: start;
-  border: 1px solid #FFECB3;
+  border: 1px solid var(--warning-light);
 }
 
 .member-chip {
   padding: 0.65rem 1.25rem;
   border-radius: 25px;
-  border: 2px solid #FFE8DC;
-  background: white;
-  color: #666;
+  border: 2px solid var(--border-light);
+  background: var(--bg-card);
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: 600;
@@ -201,22 +207,22 @@ textarea:focus {
 }
 
 .member-chip:hover {
-  border-color: #FFD4BF;
-  background: #FFF5F0;
+  border-color: var(--primary);
+  background: var(--primary-light);
 }
 
 .member-chip.active {
-  border-color: #FF6B35;
-  background: #FF6B35;
-  color: white;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-md);
 }
 
 .emergency-button {
   position: fixed;
   right: 1.5rem;
   bottom: 1.5rem;
-  background: #E53935;
+  background: var(--danger);
   color: white;
   border: none;
   border-radius: 999px;
@@ -230,7 +236,7 @@ textarea:focus {
 }
 
 .emergency-button:hover {
-  background: #C62828;
+  background: #c62828;
   transform: translateY(-1px);
   box-shadow: 0 14px 32px rgba(198, 40, 40, 0.5);
 }

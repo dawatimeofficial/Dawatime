@@ -4,11 +4,16 @@
   justify-content: center;
   min-height: 100vh;
   padding: 1.5rem;
+  background: var(--bg-primary);
 }
 
 .auth-card {
   max-width: 420px;
   width: 100%;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
 }
 
 .auth-header {
@@ -32,12 +37,12 @@
   font-size: 2rem;
   font-family: "Poppins", sans-serif;
   font-weight: 800;
-  color: #2C3E50;
+  color: var(--text-main);
   margin: 0 0 0.25rem 0;
 }
 
 .auth-tagline {
-  color: #7F8C8D;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   margin: 0;
 }
@@ -47,18 +52,18 @@
 }
 
 .auth-error {
-  background: #FFEBEE;
-  color: #C62828;
+  background: var(--danger-light);
+  color: var(--danger);
   padding: 0.75rem 1rem;
   border-radius: 12px;
   font-size: 0.9rem;
   margin-bottom: 1rem;
-  border: 1px solid #FFCDD2;
+  border: 1px solid var(--danger-light);
 }
 
 .auth-field-error {
   display: block;
-  color: #C62828;
+  color: var(--danger);
   font-size: 0.85rem;
   margin-top: 0.35rem;
 }
@@ -69,13 +74,13 @@
 
 .auth-switch {
   text-align: center;
-  color: #7F8C8D;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   margin: 0;
 }
 
 .auth-switch a {
-  color: #FF6B35;
+  color: var(--primary);
   font-weight: 600;
   text-decoration: none;
 }
