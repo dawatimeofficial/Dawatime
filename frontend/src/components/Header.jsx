@@ -14,7 +14,7 @@ export default function Header() {
       {/* 🔥 Download button (ONLY on website) */}
       {!isNative && (
         <a
-          href="https://drive.google.com/file/d/1dLQ8xHdc0u-D--OeSvD33AQRc5CBvQ_0/view?usp=sharing" // 🔁 replace this
+          href="https://drive.google.com/file/d/1mu5bjaXd34sq4kbcCSLt8sCn-m6rcZzv/view?usp=sharing" // 🔁 replace this
           className="download-btn"
         >
           ⬇ Get App
