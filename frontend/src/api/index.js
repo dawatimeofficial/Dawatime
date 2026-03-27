@@ -146,11 +146,12 @@ export async function addFamilyMember(phone) {
   return await handleResponse(res);
 }
 
-export async function removeFamilyMember(id) {
-  const res = await fetch(`${API_ROOT}/users/family/${id}`, {
-    method: 'DELETE',
+// ================= AI HEALTH =================
+export async function getHealthGuide(symptoms) {
+  const res = await fetch(`${API_ROOT}/ai/health-guide`, {
+    method: 'POST',
     headers: authHeaders(),
+    body: JSON.stringify({ symptoms }),
   });
-
   return await handleResponse(res);
 }

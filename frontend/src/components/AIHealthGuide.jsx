@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Search, AlertTriangle, Home, Pill, AlertCircle, Loader2 } from 'lucide-react';
+import { getHealthGuide } from '../api';
 import './AIHealthGuide.css';
 
 export default function AIHealthGuide() {
@@ -17,20 +18,7 @@ export default function AIHealthGuide() {
     setResult(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/ai/health-guide', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ symptoms: symptoms.trim() }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Failed to analyze symptoms');
-      }
-
+      const data = await getHealthGuide(symptoms.trim());
       setResult(data);
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
