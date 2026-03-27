@@ -1,8 +1,12 @@
-import { AlertCircle, Search } from 'lucide-react';
+import { useState } from 'react';
+import { AlertCircle, Search, Sparkles } from 'lucide-react';
 import SymptomGuide from './SymptomGuide';
+import AIHealthGuide from './AIHealthGuide';
 import './SymptomsTab.css';
 
 export default function SymptomsTab({ searchSymptom, setSearchSymptom }) {
+  const [activeMode, setActiveMode] = useState('manual');
+
   return (
     <div className="card">
       <div className="warning-banner">
@@ -14,22 +18,45 @@ export default function SymptomsTab({ searchSymptom, setSearchSymptom }) {
         </div>
       </div>
 
-      <h2 className="symptoms-title">Common Health Issues</h2>
-
-      <div className="symptoms-search-wrap">
-        <div className="symptoms-search-inner">
-          <Search size={20} className="symptoms-search-icon" />
-          <input
-            type="text"
-            placeholder="Search symptoms..."
-            value={searchSymptom}
-            onChange={(e) => setSearchSymptom(e.target.value)}
-            className="symptoms-search-input"
-          />
-        </div>
+      <div className="symptoms-mode-toggle">
+        <button
+          type="button"
+          className={`symptoms-mode-btn ${activeMode === 'manual' ? 'active' : ''}`}
+          onClick={() => setActiveMode('manual')}
+        >
+          <Search size={16} />
+          Manual Guide
+        </button>
+        <button
+          type="button"
+          className={`symptoms-mode-btn ${activeMode === 'ai' ? 'active' : ''}`}
+          onClick={() => setActiveMode('ai')}
+        >
+          <Sparkles size={16} />
+          AI Analysis
+        </button>
       </div>
 
-      <SymptomGuide searchTerm={searchSymptom} />
+      {activeMode === 'manual' && (
+        <>
+          <h2 className="symptoms-title">Common Health Issues</h2>
+          <div className="symptoms-search-wrap">
+            <div className="symptoms-search-inner">
+              <Search size={20} className="symptoms-search-icon" />
+              <input
+                type="text"
+                placeholder="Search symptoms..."
+                value={searchSymptom}
+                onChange={(e) => setSearchSymptom(e.target.value)}
+                className="symptoms-search-input"
+              />
+            </div>
+          </div>
+          <SymptomGuide searchTerm={searchSymptom} />
+        </>
+      )}
+
+      {activeMode === 'ai' && <AIHealthGuide />}
     </div>
   );
 }

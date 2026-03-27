@@ -5,6 +5,7 @@ import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import medicationRoutes from './routes/medicationRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import aiRoutes from './routes/aiRoutes.js';
 import { startCronJobs } from './utils/cron.js';
 import { sendPushNotification } from './utils/firebase.js';
 import User from './models/User.js';
@@ -50,6 +51,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/medications', medicationRoutes);
 app.use('/api/users', userRoutes);
 app.use('/users', userRoutes);
+app.use('/api/ai', aiRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

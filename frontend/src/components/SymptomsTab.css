@@ -6,6 +6,37 @@
   font-weight: 700;
 }
 
+.symptoms-mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.symptoms-mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.symptoms-mode-btn:hover {
+  background: #f9fafb;
+}
+
+.symptoms-mode-btn.active {
+  background: #FF6B35;
+  border-color: #FF6B35;
+  color: white;
+}
+
 .symptoms-search-wrap {
   margin-bottom: 1.5rem;
 }
