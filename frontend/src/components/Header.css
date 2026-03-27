@@ -12,6 +12,19 @@
   margin-bottom: 0.75rem;
 }
 
+.header-theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+@media (max-width: 600px) {
+  .header-theme-toggle {
+    top: 10px;
+    right: 10px;
+  }
+}
+
 .header-logo {
   width: 48px;
   height: 48px;
@@ -25,7 +38,7 @@
 }
 
 .header-title {
-  color: #2C3E50;
+  color: var(--text-main);
   font-size: 2.5rem;
   font-family: "Poppins", sans-serif;
   font-weight: 800;
@@ -34,20 +47,20 @@
 }
 
 .header-tagline {
-  color: #7F8C8D;
+  color: var(--text-secondary);
   font-size: 1rem;
   font-weight: 500;
   margin: 0;
 }
 
 .header-support {
-  color: #95A5A6;
+  color: var(--text-muted);
   font-size: 0.85rem;
   margin-top: 0.35rem;
 }
 
 .header-support a {
-  color: #FF6B35;
+  color: var(--primary);
   text-decoration: none;
   font-weight: 600;
 }
@@ -66,7 +79,7 @@
 }
 
 .header-user-name {
-  color: #555;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -83,7 +96,7 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  background: #ff6b2c;
+  background: var(--primary);
   color: white;
   padding: 8px 14px;
   border-radius: 8px;

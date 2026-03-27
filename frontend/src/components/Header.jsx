@@ -1,6 +1,7 @@
 import { Pill, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Capacitor } from '@capacitor/core';
+import ThemeToggle from './ThemeToggle';
 import './Header.css';
 
 export default function Header() {
@@ -25,6 +26,10 @@ export default function Header() {
           <Pill size={28} color="white" strokeWidth={2.5} />
         </div>
         <h1 className="header-title">DawaTime</h1>
+      </div>
+
+      <div className="header-theme-toggle">
+        <ThemeToggle variant="icon" />
       </div>
 
       <p className="header-tagline">Medicine reminders made simple 💊</p>

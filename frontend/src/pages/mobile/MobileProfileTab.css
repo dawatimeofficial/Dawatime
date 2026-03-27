@@ -7,10 +7,110 @@
   flex-direction: column;
   align-items: center;
   padding: 24px 16px;
-  background: white;
+  background: var(--bg-card);
   border-radius: 16px;
   margin-bottom: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.mobile-profile-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 4px 0;
+}
+
+.mobile-profile-phone {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.mobile-profile-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px 8px;
+}
+
+.mobile-profile-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-profile-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.mobile-profile-item span:first-of-type {
+  margin-left: auto;
+  color: var(--text-main);
+}
+
+.mobile-profile-about-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 4px 0;
+}
+
+.mobile-profile-about-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.mobile-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: var(--danger-light);
+  color: var(--danger);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.mobile-emergency-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: var(--danger);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .mobile-profile-avatar {

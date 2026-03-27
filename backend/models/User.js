@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, required: true, unique: true, trim: true },
   password: { type: String, required: true },
   fcmToken: { type: String },
+  themePreference: { type: String, enum: ['light', 'dark', 'system'], default: 'system' },
   familyMembers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 }, {
   timestamps: true,

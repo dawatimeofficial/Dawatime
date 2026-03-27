@@ -165,3 +165,13 @@ export async function getHealthGuide(symptoms) {
   });
   return await handleResponse(res);
 }
+
+// ================= THEME =================
+export async function updateThemePreference(themePreference) {
+  const res = await fetch(`${API_ROOT}/users/theme`, {
+    method: 'PATCH',
+    headers: authHeaders(),
+    body: JSON.stringify({ themePreference }),
+  });
+  return await handleResponse(res);
+}

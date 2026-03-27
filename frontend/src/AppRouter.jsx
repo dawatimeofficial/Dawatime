@@ -21,7 +21,7 @@ export default function AppRouter() {
 
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 5000); // adjust timing
+    }, 3200); // adjust timing
 
     return () => clearTimeout(timer);
   }, [isNative]);

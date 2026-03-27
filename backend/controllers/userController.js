@@ -88,3 +88,22 @@ export const removeFamily = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const updateTheme = async (req, res) => {
+  try {
+    const { themePreference } = req.body;
+    if (!['light', 'dark', 'system'].includes(themePreference)) {
+      return res.status(400).json({ error: 'Invalid theme preference' });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { themePreference },
+      { new: true }
+    );
+
+    res.json({ themePreference: user.themePreference });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
