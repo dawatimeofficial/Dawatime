@@ -25,7 +25,7 @@ export function ThemeProvider({ children }) {
         style: effectiveTheme === 'dark' ? Style.Dark : Style.Light,
       });
       StatusBar.setBackgroundColor({
-        color: effectiveTheme === 'dark' ? '#121212' : '#ffffff',
+        color: effectiveTheme === 'dark' ? '#121212' : '#f8f9fa',
       });
     }
   }, []);

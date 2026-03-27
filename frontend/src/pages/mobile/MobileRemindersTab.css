@@ -15,7 +15,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: var(--primary-light);
+  background: var(--brand-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,114 +25,13 @@
 .mobile-empty-title {
   font-size: 18px;
   font-weight: 600;
-  color: var(--text-main);
+  color: var(--text-primary);
   margin: 0 0 8px 0;
 }
 
 .mobile-empty-desc {
   font-size: 14px;
   color: var(--text-secondary);
-  margin: 0;
-}
-
-.mobile-med-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--bg-card);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: var(--shadow-sm);
-  opacity: 0;
-  animation: slideInRight 0.3s ease forwards;
-}
-
-.mobile-med-card.due {
-  border: 2px solid var(--primary);
-}
-
-.mobile-med-card.med-success {
-  background: #dcfce7;
-  border-color: var(--accent);
-}
-
-.mobile-med-name {
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--text-main);
-  margin: 0 0 4px 0;
-}
-
-.mobile-med-dosage {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin: 0 0 8px 0;
-}
-
-.mobile-med-time {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 13px;
-  color: var(--primary);
-  font-weight: 500;
-}
-
-.mobile-med-btn-take {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 14px 24px;
-  border-radius: 12px;
-  border: none;
-  background: var(--primary);
-  color: white;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  min-height: 48px;
-  transition: transform 0.15s ease, background 0.15s ease;
-}
-
-.mobile-med-btn-take:active {
-  transform: scale(0.95);
-  background: var(--primary-hover);
-}
-
-.mobile-med-btn-take:disabled {
-  background: var(--accent);
-}
-
-.mobile-med-btn-delete {
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  background: var(--danger-light);
-  color: var(--danger);
-  cursor: pointer;
-  min-width: 48px;
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.15s ease, background 0.15s ease;
-}
-
-.mobile-med-btn-delete:active {
-  transform: scale(0.95);
-  background: var(--danger-light);
-}
-
-.mobile-empty-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #111827;
-  margin: 0 0 8px 0;
-}
-
-.mobile-empty-desc {
-  font-size: 14px;
-  color: #6b7280;
   margin: 0;
 }
 
@@ -146,21 +45,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
-  border-radius: 16px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
   padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-subtle);
   opacity: 0;
   animation: slideInRight 0.3s ease forwards;
 }
 
 .mobile-med-card.due {
-  border: 2px solid #FF6B35;
+  border: 2px solid var(--brand-primary);
+  border-left-width: 4px;
 }
 
 .mobile-med-card.med-success {
   background: #dcfce7;
-  border-color: #22c55e;
+  border-color: var(--accent);
 }
 
 .mobile-med-info {
@@ -170,13 +71,13 @@
 .mobile-med-name {
   font-size: 17px;
   font-weight: 600;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0 0 4px 0;
 }
 
 .mobile-med-dosage {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin: 0 0 8px 0;
 }
 
@@ -185,7 +86,7 @@
   align-items: center;
   gap: 4px;
   font-size: 13px;
-  color: #FF6B35;
+  color: var(--brand-primary);
   font-weight: 500;
 }
 
@@ -200,44 +101,48 @@
   align-items: center;
   gap: 6px;
   padding: 14px 24px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   border: none;
-  background: #FF6B35;
+  background: var(--brand-primary);
   color: white;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   min-height: 48px;
-  transition: transform 0.15s ease, background 0.15s ease;
+  transition: all 0.15s ease;
 }
 
 .mobile-med-btn-take:active {
   transform: scale(0.95);
-  background: #e55a2b;
+  background: var(--brand-hover);
 }
 
 .mobile-med-btn-take:disabled {
-  background: #22c55e;
+  background: var(--accent);
 }
 
 .mobile-med-btn-delete {
   padding: 12px;
-  border-radius: 12px;
-  border: none;
-  background: #fef2f2;
-  color: #ef4444;
+  border-radius: var(--radius-lg);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--danger-main);
   cursor: pointer;
   min-width: 48px;
   min-height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.15s ease, background 0.15s ease;
+  transition: all 0.15s ease;
+}
+
+.mobile-med-btn-delete:hover {
+  background: var(--danger-subtle);
+  border-color: var(--danger-border);
 }
 
 .mobile-med-btn-delete:active {
   transform: scale(0.95);
-  background: #fee2e2;
 }
 
 @keyframes slideInRight {
@@ -254,7 +159,7 @@
 @keyframes medSuccess {
   0% {
     transform: scale(1);
-    background: white;
+    background: var(--bg-surface);
   }
   50% {
     transform: scale(1.02);

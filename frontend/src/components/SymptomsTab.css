@@ -1,7 +1,7 @@
 .symptoms-title {
   font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
-  color: var(--text-main);
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
   font-weight: 700;
 }
@@ -17,9 +17,9 @@
   align-items: center;
   gap: 6px;
   padding: 10px 16px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
@@ -28,12 +28,12 @@
 }
 
 .symptoms-mode-btn:hover {
-  background: var(--bg-secondary);
+  background: var(--bg-elevated);
 }
 
 .symptoms-mode-btn.active {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
   color: white;
 }
 

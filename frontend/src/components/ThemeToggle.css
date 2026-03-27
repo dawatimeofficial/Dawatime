@@ -1,9 +1,9 @@
 .theme-toggle {
   display: flex;
   gap: 4px;
-  background: var(--bg-secondary);
+  background: var(--bg-elevated);
   padding: 4px;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
 }
 
 .theme-toggle-icon {
@@ -15,13 +15,14 @@
   border: none;
   border-radius: var(--radius-md);
   background: transparent;
-  color: var(--text-main);
+  color: var(--text-secondary);
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .theme-toggle-icon:hover {
-  background: var(--bg-secondary);
+  background: var(--bg-surface);
+  color: var(--text-primary);
 }
 
 .theme-option {
@@ -40,11 +41,11 @@
 }
 
 .theme-option:hover {
-  color: var(--text-main);
+  color: var(--text-primary);
 }
 
 .theme-option.active {
-  background: var(--bg-primary);
-  color: var(--primary);
+  background: var(--bg-surface);
+  color: var(--brand-primary);
   box-shadow: var(--shadow-sm);
 }

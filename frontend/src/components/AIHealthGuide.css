@@ -9,13 +9,13 @@
 .ai-guide-title {
   font-size: 20px;
   font-weight: 600;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0 0 8px 0;
 }
 
 .ai-guide-subtitle {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -28,18 +28,20 @@
 .ai-guide-input {
   width: 100%;
   padding: 16px;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
   font-size: 16px;
   resize: vertical;
   min-height: 100px;
   font-family: inherit;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
 }
 
 .ai-guide-input:focus {
   outline: none;
-  border-color: #FF6B35;
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px var(--brand-glow);
 }
 
 .ai-guide-btn {
@@ -48,22 +50,24 @@
   justify-content: center;
   gap: 8px;
   padding: 14px 24px;
-  background: #FF6B35;
+  background: var(--brand-primary);
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.15s ease;
+  transition: all 0.15s ease;
 }
 
 .ai-guide-btn:active {
   transform: scale(0.98);
+  background: var(--brand-hover);
 }
 
 .ai-guide-btn:disabled {
-  background: #d1d5db;
+  background: var(--border-strong);
+  color: var(--text-muted);
   cursor: not-allowed;
 }
 
@@ -79,7 +83,7 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: #fff7ed;
+  background: var(--brand-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +91,7 @@
 }
 
 .spinner {
-  color: #FF6B35;
+  color: var(--brand-primary);
   animation: spin 1s linear infinite;
 }
 
@@ -103,13 +107,13 @@
 .ai-guide-loading-text {
   font-size: 18px;
   font-weight: 600;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0 0 8px 0;
 }
 
 .ai-guide-loading-subtext {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -119,7 +123,7 @@
   align-items: center;
   padding: 32px 24px;
   text-align: center;
-  color: #dc2626;
+  color: var(--danger-main);
 }
 
 .ai-guide-error svg {
@@ -133,13 +137,18 @@
 
 .ai-guide-btn-retry {
   padding: 12px 24px;
-  background: #fef2f2;
-  color: #dc2626;
-  border: 1px solid #fecaca;
-  border-radius: 8px;
+  background: transparent;
+  color: var(--danger-main);
+  border: 1px solid var(--danger-main);
+  border-radius: var(--radius-md);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ai-guide-btn-retry:hover {
+  background: var(--danger-subtle);
 }
 
 .ai-guide-result {
@@ -150,13 +159,18 @@
 
 .ai-guide-btn-new {
   padding: 12px 24px;
-  background: #f3f4f6;
-  color: #111827;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ai-guide-btn-new:hover {
+  background: var(--bg-surface);
 }
 
 .ai-disclaimer {
@@ -164,10 +178,10 @@
   align-items: flex-start;
   gap: 8px;
   padding: 12px 16px;
-  background: #fef3c7;
-  border-radius: 8px;
+  background: var(--warning-subtle);
+  border-radius: var(--radius-md);
   font-size: 13px;
-  color: #92400e;
+  color: var(--text-primary);
   line-height: 1.5;
 }
 
@@ -177,10 +191,11 @@
 }
 
 .ai-result-card {
-  background: white;
-  border-radius: 12px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
   padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-subtle);
 }
 
 .ai-result-header {
@@ -193,7 +208,7 @@
 .ai-result-header h3 {
   font-size: 16px;
   font-weight: 600;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -204,7 +219,7 @@
 
 .ai-result-list li {
   font-size: 14px;
-  color: #374151;
+  color: var(--text-secondary);
   margin-bottom: 8px;
   line-height: 1.5;
 }
@@ -218,25 +233,25 @@
 }
 
 .ai-result-card.care .ai-result-header {
-  color: #10b981;
+  color: var(--accent);
 }
 
 .ai-result-card.medicines .ai-result-header {
-  color: #f59e0b;
+  color: var(--warning);
 }
 
 .ai-result-card.warnings .ai-result-header {
-  color: #ef4444;
+  color: var(--danger-main);
 }
 
 .ai-result-card.warnings {
-  border: 1px solid #fee2e2;
-  background: #fef2f2;
+  border: 1px solid var(--danger-border);
+  background: var(--danger-subtle);
 }
 
 .ai-result-empty {
   font-size: 14px;
-  color: #9ca3af;
+  color: var(--text-muted);
   font-style: italic;
   margin: 0;
 }

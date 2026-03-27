@@ -15,7 +15,7 @@
 .schedule-title {
   font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
-  color: var(--text-main);
+  color: var(--text-primary);
   margin: 0;
   font-weight: 700;
 }
@@ -29,7 +29,7 @@
 .empty-icon-wrap {
   width: 80px;
   height: 80px;
-  background: var(--primary-light);
+  background: var(--brand-subtle);
   border-radius: 50%;
   display: flex;
   align-items: center;

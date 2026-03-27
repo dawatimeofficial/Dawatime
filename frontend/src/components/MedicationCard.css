@@ -19,7 +19,7 @@
 .med-card-title {
   margin: 0;
   font-size: 1.15rem;
-  color: var(--text-main);
+  color: var(--text-primary);
   font-weight: 700;
 }
 
@@ -28,7 +28,7 @@
   color: white;
   font-size: 0.7rem;
   padding: 0.25rem 0.6rem;
-  border-radius: 12px;
+  border-radius: var(--radius-full);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -47,31 +47,37 @@
   font-size: 0.85rem;
   font-weight: 700;
   padding: 0.5rem 0.75rem;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   display: inline-flex;
   width: fit-content;
 }
 
 .med-card-next.normal {
-  color: var(--primary);
-  background: var(--primary-light);
+  color: var(--brand-primary);
+  background: var(--brand-subtle);
 }
 
 .med-card-next.due {
   color: var(--warning);
-  background: var(--warning-light);
+  background: var(--warning-subtle);
+}
+
+.med-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .btn-mark {
   padding: 0.6rem;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .btn-mark.normal {
-  background: var(--bg-secondary);
+  background: var(--bg-elevated);
   color: var(--text-muted);
 }
 
@@ -83,12 +89,18 @@
 
 .btn-delete {
   padding: 0.6rem;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   border: none;
-  background: var(--danger-light);
-  color: var(--danger);
+  background: transparent;
+  color: var(--danger-main);
   cursor: pointer;
   transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-delete:hover {
+  background: var(--danger-subtle);
+  border-color: var(--danger-border);
 }
 
 .med-card-notes {
@@ -97,88 +109,5 @@
   color: var(--text-muted);
   font-style: italic;
   padding-top: 0.75rem;
-  border-top: 1px solid var(--border-light);
-}
-
-.med-card-due-badge {
-  background: #FF9800;
-  color: white;
-  font-size: 0.7rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.med-card-dosage {
-  margin: 0 0 0.75rem 0;
-  color: #7F8C8D;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.med-card-next {
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  padding: 0.5rem 0.75rem;
-  border-radius: 10px;
-  display: inline-flex;
-  width: fit-content;
-}
-
-.med-card-next.normal {
-  color: #FF6B35;
-  background: #FFF5F0;
-}
-
-.med-card-next.due {
-  color: #FF9800;
-  background: #FFF9F5;
-}
-
-.med-card-actions {
-  display: flex;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
-.btn-mark {
-  padding: 0.6rem;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-mark.normal {
-  background: #E8E8E8;
-  color: #999;
-}
-
-.btn-mark.due {
-  background: #4CAF50;
-  color: white;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-}
-
-.btn-delete {
-  padding: 0.6rem;
-  border-radius: 12px;
-  border: none;
-  background: #FFE5E5;
-  color: #F44336;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.med-card-notes {
-  margin: 0.75rem 0 0 0;
-  font-size: 0.85rem;
-  color: #999;
-  font-style: italic;
-  padding-top: 0.75rem;
-  border-top: 1px solid #F5F5F5;
+  border-top: 1px solid var(--border-subtle);
 }

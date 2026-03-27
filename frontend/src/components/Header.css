@@ -1,5 +1,5 @@
 .header {
-  position:relative;
+  position: relative;
   text-align: center;
   margin-bottom: 2rem;
   animation: slideUp 0.5s ease-out;
@@ -10,19 +10,6 @@
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 0.75rem;
-}
-
-.header-theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-@media (max-width: 600px) {
-  .header-theme-toggle {
-    top: 10px;
-    right: 10px;
-  }
 }
 
 .header-logo {
@@ -38,7 +25,7 @@
 }
 
 .header-title {
-  color: var(--text-main);
+  color: var(--text-primary);
   font-size: 2.5rem;
   font-family: "Poppins", sans-serif;
   font-weight: 800;
@@ -60,7 +47,7 @@
 }
 
 .header-support a {
-  color: var(--primary);
+  color: var(--brand-primary);
   text-decoration: none;
   font-weight: 600;
 }
@@ -96,10 +83,10 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  background: var(--primary);
+  background: var(--brand-primary);
   color: white;
   padding: 8px 14px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 14px;
   text-decoration: none;
   font-weight: 500;
@@ -108,10 +95,21 @@
 }
 
 .download-btn:hover {
-  background: #e65a1f;
+  background: var(--brand-hover);
+}
+
+.header-theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 @media (max-width: 600px) {
+  .header-theme-toggle {
+    top: 10px;
+    right: 10px;
+  }
+  
   .download-btn {
     top: 10px;
     left: 10px;
