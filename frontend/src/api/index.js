@@ -146,6 +146,16 @@ export async function addFamilyMember(phone) {
   return await handleResponse(res);
 }
 
+// ================= FAMILY REMOVE =================
+export async function removeFamilyMember(id) {
+  const res = await fetch(`${API_ROOT}/users/family/${id}`, {
+    method: 'DELETE',
+    headers: authHeaders(),
+  });
+
+  return await handleResponse(res);
+}
+
 // ================= AI HEALTH =================
 export async function getHealthGuide(symptoms) {
   const res = await fetch(`${API_ROOT}/ai/health-guide`, {
