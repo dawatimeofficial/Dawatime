@@ -1,4 +1,5 @@
 import { Pill, LogOut } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import { Capacitor } from '@capacitor/core';
 import ThemeToggle from './ThemeToggle';
@@ -6,6 +7,7 @@ import './Header.css';
 
 export default function Header() {
   const { user, logout } = useAuth();
+  const { t } = useTranslation();
   const isNative = Capacitor.isNativePlatform();
 
   return (
@@ -17,7 +19,7 @@ export default function Header() {
           href="https://drive.google.com/file/d/1mu5bjaXd34sq4kbcCSLt8sCn-m6rcZzv/view?usp=sharing" // 🔁 replace this
           className="download-btn"
         >
-          ⬇ Get App
+          ⬇ {t('header.getApp')}
         </a>
       )}
 
@@ -32,10 +34,10 @@ export default function Header() {
         <ThemeToggle variant="icon" />
       </div>
 
-      <p className="header-tagline">Medicine reminders made simple 💊</p>
+      <p className="header-tagline">{t('header.tagline')}</p>
 
       <p className="header-support">
-        Support:{' '}
+        {t('header.support')}:{' '}
         <a href="mailto:dawatime.official@gmail.com">
           dawatime.official@gmail.com
         </a>
@@ -48,10 +50,10 @@ export default function Header() {
             type="button"
             className="header-logout btn btn-secondary"
             onClick={logout}
-            title="Sign out"
+            title={t('header.signOut')}
           >
             <LogOut size={18} />
-            Sign out
+            {t('header.signOut')}
           </button>
         </div>
       )}

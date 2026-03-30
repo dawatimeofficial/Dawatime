@@ -19,9 +19,11 @@ import {
   removeFamilyMember as apiRemoveFamilyMember,
   markMedicationTaken,
 } from '../api/index.js';
+import { useTranslation } from 'react-i18next';
 import '../App.css';
 
 export default function DawaTimeApp() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('reminders');
   const [medications, setMedications] = useState([]);
   const [familyMembers, setFamilyMembers] = useState([]);
@@ -110,25 +112,25 @@ export default function DawaTimeApp() {
 
   const getUpcomingDose = (med) => {
     const lastTaken = med.history?.[med.history.length - 1];
-    if (!lastTaken) return 'Take now';
+    if (!lastTaken) return t('time.takeNow');
 
     const lastTime = new Date(lastTaken.timestamp);
     const hours = parseInt(med.frequency) || 24;
     const nextTime = new Date(lastTime.getTime() + hours * 60 * 60 * 1000);
     const now = new Date();
 
-    if (nextTime <= now) return 'Take now';
+    if (nextTime <= now) return t('time.takeNow');
 
     const diff = nextTime - now;
     const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
     const minsLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-    if (hoursLeft > 0) return `In ${hoursLeft}h ${minsLeft}m`;
-    return `In ${minsLeft}m`;
+    if (hoursLeft > 0) return t('time.inHoursMins', { hours: hoursLeft, mins: minsLeft });
+    return t('time.inMins', { mins: minsLeft });
   };
 
   const isDueNow = (med) => {
-    return getUpcomingDose(med) === 'Take now';
+    return getUpcomingDose(med) === t('time.takeNow');
   };
 
   if (loading) {
@@ -235,7 +237,7 @@ export default function DawaTimeApp() {
           window.location.href = 'tel:108';
         }}
       >
-        Emergency – Call 108
+        {t('common.emergencyCall')}
       </button>
     </WebLayout>
   );

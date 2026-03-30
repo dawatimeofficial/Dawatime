@@ -1,5 +1,6 @@
 import { Heart, Plus, Trash2, User } from 'lucide-react';
 import AddFamilyMemberModal from '../../components/AddFamilyMemberModal';
+import { useTranslation } from 'react-i18next';
 import './MobileFamilyTab.css';
 
 export default function MobileFamilyTab({
@@ -10,10 +11,11 @@ export default function MobileFamilyTab({
   setShowAddMember,
   addFamilyMember,
 }) {
+  const { t } = useTranslation();
   return (
     <div className="mobile-family">
       <div className="mobile-section-header">
-        <h2 className="mobile-section-title">Family Members</h2>
+        <h2 className="mobile-section-title">{t('family.title')}</h2>
       </div>
 
       {familyMembers.length === 0 ? (
@@ -21,15 +23,15 @@ export default function MobileFamilyTab({
           <div className="mobile-empty-icon">
             <Heart size={48} color="#FFB199" strokeWidth={1.5} />
           </div>
-          <p className="mobile-empty-title">No family members yet</p>
-          <p className="mobile-empty-desc">Add family to manage their medications</p>
+          <p className="mobile-empty-title">{t('family.emptyTitle')}</p>
+          <p className="mobile-empty-desc">{t('family.emptyDesc')}</p>
           <button
             type="button"
             className="mobile-add-btn"
             onClick={() => setShowAddMember(true)}
           >
             <Plus size={20} />
-            Add Family Member
+            {t('family.addMember')}
           </button>
         </div>
       ) : (
@@ -47,15 +49,14 @@ export default function MobileFamilyTab({
                   <div className="mobile-family-info">
                     <h3 className="mobile-family-name">{member.name}</h3>
                     <p className="mobile-family-meta">
-                      {member.phone} • {memberMeds.length} medication
-                      {memberMeds.length !== 1 ? 's' : ''}
+                      {member.phone} • {memberMeds.length} {memberMeds.length !== 1 ? t('family.medication_other') : t('family.medication_one')}
                     </p>
                   </div>
                   <button
                     type="button"
                     className="mobile-family-delete"
                     onClick={() => {
-                      if (confirm(`Remove ${member.name}?`)) {
+                      if (confirm(`${t('family.removeConfirm')} ${member.name}?`)) {
                         deleteFamilyMember(member.id);
                       }
                     }}
@@ -72,7 +73,7 @@ export default function MobileFamilyTab({
             onClick={() => setShowAddMember(true)}
           >
             <Plus size={24} />
-            Add Family Member
+            {t('family.addMember')}
           </button>
         </>
       )}

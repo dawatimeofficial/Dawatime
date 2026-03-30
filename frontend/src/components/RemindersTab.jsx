@@ -1,6 +1,7 @@
 import { Pill, Plus } from 'lucide-react';
 import MedicationCard from './MedicationCard';
 import AddMedicationModal from './AddMedicationModal';
+import { useTranslation } from 'react-i18next';
 import './RemindersTab.css';
 
 export default function RemindersTab({
@@ -13,6 +14,7 @@ export default function RemindersTab({
   setShowAddMed,
   addMedication,
 }) {
+  const { t } = useTranslation();
   return (
     <div className="card">
 
@@ -29,8 +31,8 @@ export default function RemindersTab({
           <div className="empty-icon-wrap">
             <Pill size={40} color="#FFB199" strokeWidth={2} />
           </div>
-          <p className="empty-title">No medications yet</p>
-          <p className="empty-desc">Add your first medicine to start tracking</p>
+          <p className="empty-title">{t('reminders.emptyTitle')}</p>
+          <p className="empty-desc">{t('reminders.emptyDesc')}</p>
         </div>
       ) : (
         <div className="med-list">

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Pill, Check, Trash2, Clock } from 'lucide-react';
 import AddMedicationModal from '../../components/AddMedicationModal';
+import { useTranslation } from 'react-i18next';
 import './MobileRemindersTab.css';
 
 export default function MobileRemindersTab({
@@ -13,6 +14,7 @@ export default function MobileRemindersTab({
   setShowAddMed,
   addMedication,
 }) {
+  const { t } = useTranslation();
   const [takingId, setTakingId] = useState(null);
 
   const handleTake = (medId) => {
@@ -30,8 +32,8 @@ export default function MobileRemindersTab({
           <div className="mobile-empty-icon">
             <Pill size={48} color="#FF9800" strokeWidth={1.5} />
           </div>
-          <p className="mobile-empty-title">No medications yet</p>
-          <p className="mobile-empty-desc">Tap + to add your first medicine</p>
+          <p className="mobile-empty-title">{t('reminders.emptyTitle')}</p>
+          <p className="mobile-empty-desc">{t('reminders.emptyDesc')}</p>
         </div>
       ) : (
         <div className="mobile-med-list">
@@ -48,7 +50,7 @@ export default function MobileRemindersTab({
               >
                 <div className="mobile-med-info">
                   <h3 className="mobile-med-name">{med.name}</h3>
-                  <p className="mobile-med-dosage">{med.dosage} • Every {med.frequency}h</p>
+                  <p className="mobile-med-dosage">{med.dosage} • {t('time.everyHours', { hours: med.frequency })}</p>
                   <div className="mobile-med-time">
                     <Clock size={14} />
                     <span>{nextDose}</span>
@@ -62,13 +64,13 @@ export default function MobileRemindersTab({
                     disabled={isTaking}
                   >
                     <Check size={20} />
-                    {isTaking ? 'Taken!' : 'Take'}
+                    {isTaking ? t('reminders.taken') : t('reminders.take')}
                   </button>
                   <button
                     type="button"
                     className="mobile-med-btn-delete mobile-scale-click"
                     onClick={() => {
-                      if (confirm('Delete this medication?')) {
+                      if (confirm(t('reminders.deleteConfirm'))) {
                         deleteMedication(med.id);
                       }
                     }}

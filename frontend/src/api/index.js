@@ -157,11 +157,11 @@ export async function removeFamilyMember(id) {
 }
 
 // ================= AI HEALTH =================
-export async function getHealthGuide(symptoms) {
+export async function getHealthGuide(symptoms, language) {
   const res = await fetch(`${API_ROOT}/ai/health-guide`, {
     method: 'POST',
     headers: authHeaders(),
-    body: JSON.stringify({ symptoms }),
+    body: JSON.stringify({ symptoms, language }),
   });
   return await handleResponse(res);
 }

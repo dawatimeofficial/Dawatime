@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './AddFamilyMemberModal.css';
 
 export default function AddFamilyMemberModal({ onAdd, onClose }) {
+  const { t } = useTranslation();
   const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -23,16 +25,16 @@ export default function AddFamilyMemberModal({ onAdd, onClose }) {
   return (
     <div className="modal-overlay">
       <div className="modal-box">
-        <h3 className="modal-title">Add Family Member</h3>
+        <h3 className="modal-title">{t('modals.addMember')}</h3>
         <p style={{ color: '#aaa', fontSize: '0.85rem', marginBottom: '16px' }}>
-          Enter the phone number of a registered DawaTime user.
+          {t('modals.enterPhoneDesc')}
         </p>
 
         <form onSubmit={handleSubmit}>
           {error && <div className="auth-error" style={{ marginBottom: '12px' }}>{error}</div>}
 
           <div className="modal-field modal-field-last">
-            <label className="modal-label">Phone Number</label>
+            <label className="modal-label">{t('auth.phone')}</label>
             <input
               type="tel"
               value={phone}
@@ -45,10 +47,10 @@ export default function AddFamilyMemberModal({ onAdd, onClose }) {
 
           <div className="modal-actions">
             <button type="submit" className="btn btn-primary" disabled={submitting}>
-              {submitting ? 'Adding...' : 'Add Member'}
+              {submitting ? t('modals.adding') : t('modals.addMember')}
             </button>
             <button type="button" className="btn btn-secondary" onClick={onClose}>
-              Cancel
+              {t('modals.cancel')}
             </button>
           </div>
         </form>

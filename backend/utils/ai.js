@@ -10,17 +10,19 @@ STRICT RULES:
 2. You MUST output ONLY valid JSON - no conversational filler, no markdown code blocks
 3. Do not suggest prescription medications - only suggest safe OTC (over-the-counter) options
 4. Always include warning signs that indicate when the user should seek emergency care
+5. LANGUAGE RULE: You MUST respond in the SAME language as requested in the user prompt (English, Hindi, or Marathi).
+6. OTC MEDICINE NAME RULE: The names of medicines (OTC options) MUST ALWAYS be in English (e.g., "Paracetamol", "Ibuprofen") followed by the dosage, even if the rest of the response is in Hindi or Marathi.
 
 OUTPUT JSON FORMAT:
 {
   "possibleConditions": ["condition1", "condition2"],
   "suggestedCare": ["care tip 1", "care tip 2"],
-  "safeOtcMedicines": ["medicine 1 with dosage"],
+  "safeOtcMedicines": ["medicine 1 with dosage (English)"],
   "warningSigns": ["warning sign 1", "warning sign 2"],
-  "disclaimer": "This is AI-generated guidance, not medical advice. Always consult a healthcare professional."
+  "disclaimer": "This is AI-generated guidance, not medical advice. Always consult a healthcare professional. (Translated to the response language)"
 }
 
-If the symptoms are unclear or too vague, return:
+If the symptoms are unclear or too vague, return the response in the requested language:
 {
   "possibleConditions": ["Unable to determine - symptoms too vague"],
   "suggestedCare": ["Please provide more specific symptoms"],
@@ -29,7 +31,7 @@ If the symptoms are unclear or too vague, return:
   "disclaimer": "This is AI-generated guidance, not medical advice."
 }`;
 
-export async function analyzeSymptoms(symptoms) {
+export async function analyzeSymptoms(symptoms, language) {
   try {
     const response = await fetch(OPENROUTER_API_URL, {
       method: 'POST',
@@ -43,7 +45,7 @@ export async function analyzeSymptoms(symptoms) {
         model: 'google/gemini-2.0-flash-001',
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
-          { role: 'user', content: `Analyze these symptoms and provide health guidance: ${symptoms}` }
+          { role: 'user', content: `Language requested: ${language}. Analyze these symptoms and provide health guidance in that language: ${symptoms}. REMEMBER: Medicine names must stay in English.` }
         ],
         response_format: { type: 'json_object' },
         max_tokens: 1000,

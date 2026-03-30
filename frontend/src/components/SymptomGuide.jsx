@@ -1,91 +1,103 @@
 import { AlertCircle, Info, Search } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import './SymptomGuide.css';
 
-const SYMPTOMS_DATA = [
-  {
-    symptom: 'Headache',
-    severity: 'Common',
-    selfCare: 'Rest in a quiet, dark room. Stay hydrated. Apply a cold or warm compress to your head or neck.',
-    otc: 'Paracetamol (Crocin) or Ibuprofen (Advil) may help',
-    seeDoctor: 'If headache is severe, sudden, or accompanied by fever, stiff neck, confusion, vision changes, or difficulty speaking',
-    emergency: 'Sudden, severe "thunderclap" headache, headache after head injury, or with high fever and stiff neck',
-  },
-  {
-    symptom: 'Fever',
-    severity: 'Common',
-    selfCare: 'Rest and drink plenty of fluids. Dress in light clothing. Take lukewarm baths.',
-    otc: 'Paracetamol (Crocin) or Ibuprofen (Advil) can reduce fever',
-    seeDoctor: 'Fever above 103°F (39.4°C), lasts more than 3 days, or accompanied by severe symptoms',
-    emergency: 'Fever with severe headache, stiff neck, difficulty breathing, chest pain, or confusion',
-  },
-  {
-    symptom: 'Cough',
-    severity: 'Common',
-    selfCare: 'Stay hydrated. Use honey (for adults). Humidify the air. Avoid irritants.',
-    otc: 'Cough suppressants or expectorants may help, but consult a doctor first',
-    seeDoctor: 'Cough lasting more than 3 weeks, coughing up blood, difficulty breathing, or high fever',
-    emergency: 'Severe difficulty breathing, blue lips or face, or chest pain with cough',
-  },
-  {
-    symptom: 'Sore Throat',
-    severity: 'Common',
-    selfCare: 'Gargle with warm salt water. Stay hydrated. Use throat lozenges. Rest your voice.',
-    otc: 'Throat lozenges, pain relievers like acetaminophen or ibuprofen',
-    seeDoctor: 'Sore throat lasting more than a week, difficulty swallowing, or swollen glands',
-    emergency: 'Severe difficulty swallowing, breathing difficulty, or drooling',
-  },
-  {
-    symptom: 'Nausea/Vomiting',
-    severity: 'Common',
-    selfCare: 'Sip clear fluids slowly. Eat bland foods (crackers, toast). Rest. Avoid strong smells.',
-    otc: 'Anti-nausea medications like bismuth subsalicylate (Pepto-Bismol), but consult doctor',
-    seeDoctor: 'Persistent vomiting for more than 24 hours, signs of dehydration, or severe abdominal pain',
-    emergency: 'Vomiting blood, severe dehydration, or chest pain with vomiting',
-  },
-  {
-    symptom: 'Diarrhea',
-    severity: 'Common',
-    selfCare: 'Stay hydrated with water and electrolyte solutions. Eat bland foods (BRAT diet: bananas, rice, applesauce, toast).',
-    otc: 'Anti-diarrheal medications like loperamide (Imodium), but avoid if you have fever or bloody stool',
-    seeDoctor: 'Diarrhea lasting more than 2 days, signs of dehydration, bloody or black stool, or high fever',
-    emergency: 'Severe dehydration, bloody diarrhea with high fever, or severe abdominal pain',
-  },
-  {
-    symptom: 'Cold/Runny Nose',
-    severity: 'Common',
-    selfCare: 'Rest, stay hydrated, use saline nasal spray, humidify the air.',
-    otc: 'Decongestants, antihistamines, or combination cold medications',
-    seeDoctor: 'Symptoms lasting more than 10 days, high fever, or severe facial pain',
-    emergency: 'Difficulty breathing or severe allergic reaction',
-  },
-  {
-    symptom: 'Allergies',
-    severity: 'Common',
-    selfCare: 'Avoid triggers, keep windows closed during high pollen days, shower after being outdoors.',
-    otc: 'Antihistamines like cetirizine (Zyrtec), Montelukast + Levocetirizine or loratadine (Claritin)',
-    seeDoctor: 'Symptoms not controlled by OTC medications or interfering with daily life',
-    emergency: 'Difficulty breathing, swelling of face/throat, or signs of anaphylaxis',
-  },
-  {
-    symptom: 'Back Pain',
-    severity: 'Common',
-    selfCare: 'Apply heat or ice. Gentle stretching. Stay active with light exercise. Maintain good posture.',
-    otc: 'Pain relievers like ibuprofen or acetaminophen',
-    seeDoctor: 'Pain lasting more than 2 weeks, pain radiating down legs, numbness, or loss of bladder control',
-    emergency: 'Sudden severe pain, trauma, fever with back pain, or loss of bladder/bowel control',
-  },
-  {
-    symptom: 'Chest Pain',
-    severity: 'Serious',
-    selfCare: 'This requires immediate medical attention - do not attempt self-care',
-    otc: 'Do not self-medicate for chest pain',
-    seeDoctor: 'ANY chest pain should be evaluated by a doctor',
-    emergency:
-      'Severe chest pain, pressure, tightness, pain spreading to arm/jaw/back, shortness of breath, sweating, nausea - CALL EMERGENCY SERVICES IMMEDIATELY',
-  },
-];
-
 export default function SymptomGuide({ searchTerm }) {
+  const { t } = useTranslation();
+
+  const SYMPTOMS_DATA = [
+    {
+      symptom: t('symptomsDb.headache.name'),
+      severity: t('sg.common'),
+      selfCare: t('symptomsDb.headache.selfCare'),
+      otc: t('symptomsDb.headache.otc'),
+      seeDoctor: t('symptomsDb.headache.seeDoctor'),
+      emergency: t('symptomsDb.headache.emergency'),
+      severityRaw: 'Common',
+    },
+    {
+      symptom: t('symptomsDb.fever.name'),
+      severity: t('sg.common'),
+      selfCare: t('symptomsDb.fever.selfCare'),
+      otc: t('symptomsDb.fever.otc'),
+      seeDoctor: t('symptomsDb.fever.seeDoctor'),
+      emergency: t('symptomsDb.fever.emergency'),
+      severityRaw: 'Common',
+    },
+    {
+      symptom: t('symptomsDb.cough.name'),
+      severity: t('sg.common'),
+      selfCare: t('symptomsDb.cough.selfCare'),
+      otc: t('symptomsDb.cough.otc'),
+      seeDoctor: t('symptomsDb.cough.seeDoctor'),
+      emergency: t('symptomsDb.cough.emergency'),
+      severityRaw: 'Common',
+    },
+    {
+      symptom: t('symptomsDb.soreThroat.name'),
+      severity: t('sg.common'),
+      selfCare: t('symptomsDb.soreThroat.selfCare'),
+      otc: t('symptomsDb.soreThroat.otc'),
+      seeDoctor: t('symptomsDb.soreThroat.seeDoctor'),
+      emergency: t('symptomsDb.soreThroat.emergency'),
+      severityRaw: 'Common',
+    },
+    {
+      symptom: t('symptomsDb.nausea.name'),
+      severity: t('sg.common'),
+      selfCare: t('symptomsDb.nausea.selfCare'),
+      otc: t('symptomsDb.nausea.otc'),
+      seeDoctor: t('symptomsDb.nausea.seeDoctor'),
+      emergency: t('symptomsDb.nausea.emergency'),
+      severityRaw: 'Common',
+    },
+    {
+      symptom: t('symptomsDb.diarrhea.name'),
+      severity: t('sg.common'),
+      selfCare: t('symptomsDb.diarrhea.selfCare'),
+      otc: t('symptomsDb.diarrhea.otc'),
+      seeDoctor: t('symptomsDb.diarrhea.seeDoctor'),
+      emergency: t('symptomsDb.diarrhea.emergency'),
+      severityRaw: 'Common',
+    },
+    {
+      symptom: t('symptomsDb.cold.name'),
+      severity: t('sg.common'),
+      selfCare: t('symptomsDb.cold.selfCare'),
+      otc: t('symptomsDb.cold.otc'),
+      seeDoctor: t('symptomsDb.cold.seeDoctor'),
+      emergency: t('symptomsDb.cold.emergency'),
+      severityRaw: 'Common',
+    },
+    {
+      symptom: t('symptomsDb.allergies.name'),
+      severity: t('sg.common'),
+      selfCare: t('symptomsDb.allergies.selfCare'),
+      otc: t('symptomsDb.allergies.otc'),
+      seeDoctor: t('symptomsDb.allergies.seeDoctor'),
+      emergency: t('symptomsDb.allergies.emergency'),
+      severityRaw: 'Common',
+    },
+    {
+      symptom: t('symptomsDb.backPain.name'),
+      severity: t('sg.common'),
+      selfCare: t('symptomsDb.backPain.selfCare'),
+      otc: t('symptomsDb.backPain.otc'),
+      seeDoctor: t('symptomsDb.backPain.seeDoctor'),
+      emergency: t('symptomsDb.backPain.emergency'),
+      severityRaw: 'Common',
+    },
+    {
+      symptom: t('symptomsDb.chestPain.name'),
+      severity: t('sg.serious'),
+      selfCare: t('symptomsDb.chestPain.selfCare'),
+      otc: t('symptomsDb.chestPain.otc'),
+      seeDoctor: t('symptomsDb.chestPain.seeDoctor'),
+      emergency: t('symptomsDb.chestPain.emergency'),
+      severityRaw: 'Serious',
+    },
+  ];
+
   const filteredSymptoms = SYMPTOMS_DATA.filter(
     (s) =>
       searchTerm === '' || s.symptom.toLowerCase().includes(searchTerm.toLowerCase())
@@ -98,7 +110,7 @@ export default function SymptomGuide({ searchTerm }) {
           <div className="symptom-card-header">
             <h3 className="symptom-card-title">{item.symptom}</h3>
             <span
-              className={`symptom-severity ${item.severity === 'Serious' ? 'serious' : 'common'}`}
+              className={`symptom-severity ${item.severityRaw === 'Serious' ? 'serious' : 'common'}`}
             >
               {item.severity}
             </span>
@@ -106,19 +118,19 @@ export default function SymptomGuide({ searchTerm }) {
 
           <div className="symptom-card-body">
             <div className="symptom-section">
-              <strong>Self-Care:</strong>
+              <strong>{t('sg.selfCare')}</strong>
               <p>{item.selfCare}</p>
             </div>
 
             <div className="symptom-section">
-              <strong>Over-the-Counter:</strong>
+              <strong>{t('sg.otc')}</strong>
               <p>{item.otc}</p>
             </div>
 
             <div className="symptom-doctor-box">
               <strong>
                 <Info size={16} />
-                See a Doctor If:
+                {t('sg.seeDoctor')}
               </strong>
               <p>{item.seeDoctor}</p>
             </div>
@@ -127,7 +139,7 @@ export default function SymptomGuide({ searchTerm }) {
               <div className="symptom-emergency-box">
                 <strong>
                   <AlertCircle size={16} />
-                  Emergency - Call 108:
+                  {t('sg.emergency')}
                 </strong>
                 <p>{item.emergency}</p>
               </div>
@@ -139,15 +151,14 @@ export default function SymptomGuide({ searchTerm }) {
       {filteredSymptoms.length === 0 && (
         <div className="symptom-empty">
           <Search size={48} className="symptom-empty-icon" />
-          <p className="symptom-empty-title">No symptoms found</p>
-          <p className="symptom-empty-desc">Try searching for something else</p>
+          <p className="symptom-empty-title">{t('sg.noSymptoms')}</p>
+          <p className="symptom-empty-desc">{t('sg.trySearch')}</p>
         </div>
       )}
 
       <div className="symptom-remember">
         <p>
-          <strong>Remember:</strong> This guide provides general information only. Always
-          consult a healthcare professional for personalized advice, diagnosis, or treatment.
+          <strong>{t('sg.remember')}</strong> {t('sg.rememberDesc')}
         </p>
       </div>
     </div>

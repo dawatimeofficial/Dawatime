@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Search, AlertTriangle, Home, Pill, AlertCircle, Loader2 } from 'lucide-react';
 import { getHealthGuide } from '../api';
 import './AIHealthGuide.css';
 
 export default function AIHealthGuide() {
+  const { t } = useTranslation();
   const [symptoms, setSymptoms] = useState('');
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,7 +20,7 @@ export default function AIHealthGuide() {
     setResult(null);
 
     try {
-      const data = await getHealthGuide(symptoms.trim());
+      const data = await getHealthGuide(symptoms.trim(), i18n.language);
       setResult(data);
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
@@ -36,9 +38,9 @@ export default function AIHealthGuide() {
   return (
     <div className="ai-health-guide">
       <div className="ai-guide-header">
-        <h2 className="ai-guide-title">AI Health Guide</h2>
+        <h2 className="ai-guide-title">{t('healthGuide.aiTitle')}</h2>
         <p className="ai-guide-subtitle">
-          Describe your symptoms for personalized health guidance
+          {t('healthGuide.aiSubtitle')}
         </p>
       </div>
 
@@ -46,7 +48,7 @@ export default function AIHealthGuide() {
         <form onSubmit={handleSubmit} className="ai-guide-form">
           <textarea
             className="ai-guide-input"
-            placeholder="e.g., I have a headache and feel tired since morning..."
+            placeholder={t('healthGuide.aiPlaceholder')}
             value={symptoms}
             onChange={(e) => setSymptoms(e.target.value)}
             rows={4}
@@ -58,7 +60,7 @@ export default function AIHealthGuide() {
             disabled={symptoms.trim().length < 5}
           >
             <Search size={18} />
-            Analyze Symptoms
+            {t('healthGuide.analyze')}
           </button>
         </form>
       )}
@@ -68,8 +70,8 @@ export default function AIHealthGuide() {
           <div className="ai-guide-loading-spinner">
             <Loader2 size={32} className="spinner" />
           </div>
-          <p className="ai-guide-loading-text">Analyzing your symptoms...</p>
-          <p className="ai-guide-loading-subtext">This may take a few seconds</p>
+          <p className="ai-guide-loading-text">{t('healthGuide.analyzing')}</p>
+          <p className="ai-guide-loading-subtext">{t('healthGuide.analyzingSub')}</p>
         </div>
       )}
 
@@ -78,7 +80,7 @@ export default function AIHealthGuide() {
           <AlertTriangle size={24} />
           <p>{error}</p>
           <button type="button" className="ai-guide-btn-retry" onClick={() => setError(null)}>
-            Try Again
+            {t('healthGuide.tryAgain')}
           </button>
         </div>
       )}
@@ -86,21 +88,20 @@ export default function AIHealthGuide() {
       {result && (
         <div className="ai-guide-result">
           <button type="button" className="ai-guide-btn-new" onClick={handleReset}>
-            Analyze New Symptoms
+            {t('healthGuide.analyzeNew')}
           </button>
 
           <div className="ai-disclaimer">
             <AlertTriangle size={16} />
             <span>
-              This is AI-generated guidance, not medical advice. Always consult a healthcare 
-              professional for serious or worsening symptoms.
+              {t('healthGuide.aiDisclaimer')}
             </span>
           </div>
 
           <div className="ai-result-card conditions">
             <div className="ai-result-header">
               <Search size={20} />
-              <h3>Possible Conditions</h3>
+              <h3>{t('healthGuide.conditions')}</h3>
             </div>
             <ul className="ai-result-list">
               {result.possibleConditions?.map((condition, index) => (
@@ -112,7 +113,7 @@ export default function AIHealthGuide() {
           <div className="ai-result-card care">
             <div className="ai-result-header">
               <Home size={20} />
-              <h3>Suggested Self-Care</h3>
+              <h3>{t('healthGuide.selfCare')}</h3>
             </div>
             <ul className="ai-result-list">
               {result.suggestedCare?.map((care, index) => (
@@ -124,7 +125,7 @@ export default function AIHealthGuide() {
           <div className="ai-result-card medicines">
             <div className="ai-result-header">
               <Pill size={20} />
-              <h3>Safe OTC Medicines</h3>
+              <h3>{t('healthGuide.otc')}</h3>
             </div>
             {result.safeOtcMedicines?.length > 0 ? (
               <ul className="ai-result-list">
@@ -133,14 +134,14 @@ export default function AIHealthGuide() {
                 ))}
               </ul>
             ) : (
-              <p className="ai-result-empty">No OTC recommendations for these symptoms</p>
+              <p className="ai-result-empty">{t('healthGuide.noOtc')}</p>
             )}
           </div>
 
           <div className="ai-result-card warnings">
             <div className="ai-result-header">
               <AlertCircle size={20} />
-              <h3>Warning Signs</h3>
+              <h3>{t('healthGuide.warnings')}</h3>
             </div>
             <ul className="ai-result-list">
               {result.warningSigns?.map((warning, index) => (

@@ -1,7 +1,9 @@
 import { Bell, Search, Users } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import './Tabs.css';
 
 export default function Tabs({ activeTab, setActiveTab }) {
+  const { t } = useTranslation();
   return (
     <div className="tabs-wrap">
       <button
@@ -9,21 +11,21 @@ export default function Tabs({ activeTab, setActiveTab }) {
         onClick={() => setActiveTab('reminders')}
       >
         <Bell size={18} className="tab-icon" />
-        Reminders
+        {t('tabs.reminders')}
       </button>
       <button
         className={`tab ${activeTab === 'symptoms' ? 'active' : ''}`}
         onClick={() => setActiveTab('symptoms')}
       >
         <Search size={18} className="tab-icon" />
-        Health Guide
+        {t('tabs.healthGuide')}
       </button>
       <button
         className={`tab ${activeTab === 'family' ? 'active' : ''}`}
         onClick={() => setActiveTab('family')}
       >
         <Users size={18} className="tab-icon" />
-        Family
+        {t('tabs.family')}
       </button>
     </div>
   );

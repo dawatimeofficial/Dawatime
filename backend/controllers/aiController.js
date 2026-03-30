@@ -2,7 +2,7 @@ import { analyzeSymptoms } from '../utils/ai.js';
 
 export const healthGuide = async (req, res) => {
   try {
-    const { symptoms } = req.body;
+    const { symptoms, language } = req.body;
 
     if (!symptoms || typeof symptoms !== 'string') {
       return res.status(400).json({ 
@@ -27,7 +27,7 @@ export const healthGuide = async (req, res) => {
       });
     }
 
-    const result = await analyzeSymptoms(trimmedSymptoms);
+    const result = await analyzeSymptoms(trimmedSymptoms, language || 'en');
     
     res.json(result);
 

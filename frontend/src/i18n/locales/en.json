@@ -1,0 +1,189 @@
+{
+  "tabs": {
+    "reminders": "Reminders",
+    "healthGuide": "Health Guide",
+    "family": "Family",
+    "profile": "Profile"
+  },
+  "header": {
+    "getApp": "Get App",
+    "tagline": "Medicine reminders made simple 💊",
+    "support": "Support",
+    "signOut": "Sign out"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signInTagline": "Sign in with your email and password",
+    "email": "Email",
+    "password": "Password",
+    "signingIn": "Signing in...",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "createAccount": "Create your account",
+    "name": "Name",
+    "phone": "Phone Number",
+    "creatingAccount": "Creating account...",
+    "haveAccount": "Already have an account?"
+  },
+  "family": {
+    "title": "Family Members",
+    "add": "Add",
+    "emptyTitle": "No family members yet",
+    "emptyDesc": "Add family to manage their medications",
+    "medication_one": "medication",
+    "medication_other": "medications",
+    "removeConfirm": "Remove",
+    "addMember": "Add Family Member"
+  },
+  "symptoms": {
+    "disclaimer": "Disclaimer: This is general information only. Always consult a healthcare professional for diagnosis and treatment. For emergencies, call local emergency services immediately.",
+    "manualMode": "Manual Guide",
+    "aiMode": "AI Analysis",
+    "title": "Common Health Issues",
+    "searchPlaceholder": "Search symptoms..."
+  },
+  "time": {
+    "takeNow": "Take now",
+    "inHoursMins": "In {{hours}}h {{mins}}m",
+    "inMins": "In {{mins}}m",
+    "everyHours": "Every {{hours}}h"
+  },
+  "common": {
+    "emergencyCall": "Emergency – Call 108"
+  },
+  "reminders": {
+    "emptyTitle": "No medications yet",
+    "emptyDesc": "Tap + to add your first medicine",
+    "take": "Take",
+    "taken": "Taken!",
+    "deleteConfirm": "Delete this medication?",
+    "dueNow": "Due Now",
+    "markAsTaken": "Mark as taken",
+    "delete": "Delete medication"
+  },
+  "modals": {
+    "addMedicine": "Add Medicine",
+    "medName": "Medicine Name *",
+    "medNamePh": "e.g., Paracetamol",
+    "dosage": "Dosage *",
+    "dosagePh": "e.g., 500mg, 2 tablets",
+    "scheduleTime": "Schedule Time * (HH:mm)",
+    "howOften": "How Often",
+    "every4": "Every 4 hours",
+    "every6": "Every 6 hours",
+    "every8": "Every 8 hours",
+    "every12": "Every 12 hours",
+    "onceDaily": "Once daily",
+    "assignFamily": "Assign to Family Members",
+    "notes": "Notes (optional)",
+    "notesPh": "e.g., Take with food, after meals",
+    "cancel": "Cancel",
+    "enterPhoneDesc": "Enter the phone number of a registered DawaTime user.",
+    "adding": "Adding...",
+    "addMember": "Add Member"
+  },
+  "profile": {
+    "about": "About",
+    "appearance": "Appearance"
+  },
+  "healthGuide": {
+    "aiTitle": "AI Health Guide",
+    "aiSubtitle": "Describe your symptoms for personalized health guidance",
+    "aiPlaceholder": "e.g., I have a headache and feel tired since morning...",
+    "analyze": "Analyze Symptoms",
+    "analyzing": "Analyzing your symptoms...",
+    "analyzingSub": "This may take a few seconds",
+    "tryAgain": "Try Again",
+    "analyzeNew": "Analyze New Symptoms",
+    "aiDisclaimer": "This is AI-generated guidance, not medical advice. Always consult a healthcare professional for serious or worsening symptoms.",
+    "conditions": "Possible Conditions",
+    "selfCare": "Suggested Self-Care",
+    "otc": "Safe OTC Medicines",
+    "noOtc": "No OTC recommendations for these symptoms",
+    "warnings": "Warning Signs"
+  },
+  "sg": {
+    "selfCare": "Self-Care:",
+    "otc": "Over-the-Counter:",
+    "seeDoctor": "See a Doctor If:",
+    "emergency": "Emergency - Call 108:",
+    "noSymptoms": "No symptoms found",
+    "trySearch": "Try searching for something else",
+    "remember": "Remember:",
+    "rememberDesc": "This guide provides general information only. Always consult a healthcare professional.",
+    "common": "Common",
+    "serious": "Serious"
+  },
+  "symptomsDb": {
+    "headache": {
+      "name": "Headache",
+      "selfCare": "Rest in a quiet, dark room. Stay hydrated.",
+      "otc": "Paracetamol or Ibuprofen",
+      "seeDoctor": "If severe, sudden, or with fever/stiff neck",
+      "emergency": "Sudden thunderclap headache, or after head injury"
+    },
+    "fever": {
+      "name": "Fever",
+      "selfCare": "Rest and drink fluids. Light clothing.",
+      "otc": "Paracetamol or Ibuprofen",
+      "seeDoctor": "Fever above 103°F or lasts >3 days",
+      "emergency": "Fever with severe headache, breathing difficulty"
+    },
+    "cough": {
+      "name": "Cough",
+      "selfCare": "Stay hydrated. Use honey. Humidify air.",
+      "otc": "Cough suppressants",
+      "seeDoctor": "Lasts >3 weeks, coughing blood",
+      "emergency": "Severe breathing difficulty, chest pain"
+    },
+    "soreThroat": {
+      "name": "Sore Throat",
+      "selfCare": "Gargle salt water. Throat lozenges.",
+      "otc": "Pain relievers, lozenges",
+      "seeDoctor": "Lasts >1 week, difficulty swallowing",
+      "emergency": "Severe difficulty swallowing or breathing"
+    },
+    "nausea": {
+      "name": "Nausea/Vomiting",
+      "selfCare": "Sip clear fluids. Bland foods. Rest.",
+      "otc": "Anti-nausea meds (consult doctor)",
+      "seeDoctor": "Persistent >24hrs, dehydration",
+      "emergency": "Vomiting blood, severe chest pain"
+    },
+    "diarrhea": {
+      "name": "Diarrhea",
+      "selfCare": "Stay hydrated. BRAT diet.",
+      "otc": "Anti-diarrheal meds (avoid if fever)",
+      "seeDoctor": "Lasts >2 days, bloody stool, fever",
+      "emergency": "Severe dehydration, bloody diarrhea"
+    },
+    "cold": {
+      "name": "Cold/Runny Nose",
+      "selfCare": "Rest, stay hydrated, saline spray.",
+      "otc": "Decongestants, antihistamines",
+      "seeDoctor": "Lasts >10 days, high fever",
+      "emergency": "Difficulty breathing"
+    },
+    "allergies": {
+      "name": "Allergies",
+      "selfCare": "Avoid triggers, shower after outdoors.",
+      "otc": "Antihistamines (Zyrtec, Claritin)",
+      "seeDoctor": "Not controlled by meds",
+      "emergency": "Difficulty breathing, face swelling"
+    },
+    "backPain": {
+      "name": "Back Pain",
+      "selfCare": "Apply heat/ice. Gentle stretches.",
+      "otc": "Ibuprofen or acetaminophen",
+      "seeDoctor": "Lasts >2 weeks, pain radiating down legs",
+      "emergency": "Sudden severe pain, loss of bladder control"
+    },
+    "chestPain": {
+      "name": "Chest Pain",
+      "selfCare": "Do NOT attempt self-care",
+      "otc": "Do not self-medicate",
+      "seeDoctor": "ANY chest pain must be evaluated",
+      "emergency": "Severe pressure, pain spreading to arm/jaw -> CALL 108"
+    }
+  }
+}

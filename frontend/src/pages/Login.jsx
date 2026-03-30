@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Pill } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { login as apiLogin } from '../api/index.js';
@@ -8,6 +9,7 @@ import '../App.css';
 import './Auth.css';
 
 export default function Login() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -48,14 +50,14 @@ export default function Login() {
             <Pill size={32} color="white" strokeWidth={2.5} />
           </div>
           <h1 className="auth-title">DawaTime</h1>
-          <p className="auth-tagline">Sign in with your email and password</p>
+          <p className="auth-tagline">{t('auth.signInTagline')}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
           {error && <div className="auth-error">{error}</div>}
 
           <div className="modal-field">
-            <label className="modal-label">Email</label>
+            <label className="modal-label">{t('auth.email')}</label>
             <input
               type="email"
               value={email}
@@ -67,7 +69,7 @@ export default function Login() {
           </div>
 
           <div className="modal-field modal-field-last">
-            <label className="modal-label">Password</label>
+            <label className="modal-label">{t('auth.password')}</label>
             <input
               type="password"
               value={password}
@@ -79,13 +81,13 @@ export default function Login() {
 
           <div className="modal-actions auth-actions">
             <button type="submit" className="btn btn-primary" disabled={submitting}>
-              {submitting ? 'Signing in...' : 'Sign In'}
+              {submitting ? t('auth.signingIn') : t('auth.signIn')}
             </button>
           </div>
         </form>
 
         <p className="auth-switch">
-          Don&apos;t have an account? <Link to="/register">Register</Link>
+          {t('auth.noAccount')} <Link to="/register">{t('auth.register')}</Link>
         </p>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { Heart, Plus, Trash2 } from 'lucide-react';
 import AddFamilyMemberModal from './AddFamilyMemberModal';
+import { useTranslation } from 'react-i18next';
 import './FamilyTab.css';
 
 export default function FamilyTab({
@@ -10,13 +11,14 @@ export default function FamilyTab({
   setShowAddMember,
   addFamilyMember,
 }) {
+  const { t } = useTranslation();
   return (
     <div className="card">
       <div className="family-header">
-        <h2 className="family-title">Family Members</h2>
+        <h2 className="family-title">{t('family.title')}</h2>
         <button className="btn btn-primary" onClick={() => setShowAddMember(true)}>
           <Plus size={18} className="family-btn-icon" />
-          Add
+          {t('family.add')}
         </button>
       </div>
 
@@ -25,8 +27,8 @@ export default function FamilyTab({
           <div className="family-empty-icon-wrap">
             <Heart size={40} color="#FFB199" strokeWidth={2} />
           </div>
-          <p className="family-empty-title">No family members yet</p>
-          <p className="family-empty-desc">Add family to manage their medications</p>
+          <p className="family-empty-title">{t('family.emptyTitle')}</p>
+          <p className="family-empty-desc">{t('family.emptyDesc')}</p>
         </div>
       ) : (
         <div className="family-list">
@@ -38,14 +40,13 @@ export default function FamilyTab({
                   <div>
                     <h3 className="family-member-name">{member.name}</h3>
                     <p className="family-member-meta">
-                      {member.phone} • {memberMeds.length} medication
-                      {memberMeds.length !== 1 ? 's' : ''}
+                      {member.phone} • {memberMeds.length} {memberMeds.length !== 1 ? t('family.medication_other') : t('family.medication_one')}
                     </p>
                   </div>
                   <button
                     className="family-btn-delete"
                     onClick={() => {
-                      if (confirm(`Remove ${member.name}?`)) {
+                      if (confirm(`${t('family.removeConfirm')} ${member.name}?`)) {
                         deleteFamilyMember(member.id);
                       }
                     }}

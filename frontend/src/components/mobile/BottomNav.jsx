@@ -1,12 +1,14 @@
 import { Bell, Search, Users, User } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import './BottomNav.css';
 
 export default function BottomNav({ activeTab, setActiveTab }) {
+  const { t } = useTranslation();
   const tabs = [
-    { id: 'reminders', icon: Bell, label: 'Home' },
-    { id: 'symptoms', icon: Search, label: 'Health Guide' },
-    { id: 'family', icon: Users, label: 'Family' },
-    { id: 'profile', icon: User, label: 'Profile' },
+    { id: 'reminders', icon: Bell, label: t('tabs.reminders') },
+    { id: 'symptoms', icon: Search, label: t('tabs.healthGuide') },
+    { id: 'family', icon: Users, label: t('tabs.family') },
+    { id: 'profile', icon: User, label: t('tabs.profile') },
   ];
 
   return (
